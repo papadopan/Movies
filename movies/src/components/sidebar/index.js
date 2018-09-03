@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import TextField from 'material-ui/TextField'
 import './sidebar.css'
+import PlacesAirportShuttle from 'material-ui/SvgIcon';
 
 class InputField extends Component{
 
@@ -16,6 +17,9 @@ class InputField extends Component{
         if ( e.key === "Enter" && this.state.query !== '')
             this.props.query( e.target.value )
     }
+    send = () =>{
+        this.props.query(this.state.query)
+    }
     render(){
         const styles = {
             floatingLabelStyle: {
@@ -29,6 +33,7 @@ class InputField extends Component{
           }
 
         return(
+            <div>
             <TextField
             floatingLabelText=" Search  . . . "  
             floatingLabelStyle={styles.floatingLabelStyle}
@@ -38,6 +43,10 @@ class InputField extends Component{
             onChange={(e) => this.setState({query:e.target.value})}
             onKeyPress={this.Pressed}
             />
+            <Link to ="/present">
+                <button onClick={this.send}> Antonis</button>
+            </Link>
+            </div>
         );
     }
 }
@@ -50,7 +59,8 @@ class Sidebar extends Component{
         this.state={
             categories:[],
             name: 'Select Genre',
-            selection:'movies'
+            selection:'movies',
+            selected_id:undefined
         }
     }
 
@@ -63,6 +73,12 @@ class Sidebar extends Component{
     // set the query category movies or actors
     changeFilter = (filter) =>{
         this.setState({selection:filter})
+    }
+
+    // when select the specific genre
+    genreSelected = (name , id) =>{
+        this.setState({name: name, selected_id:id})
+        this.props.selectedId(name, id)
     }
     render(){
         return(
@@ -78,7 +94,7 @@ class Sidebar extends Component{
                             <ul className="dropdown-menu " aria-labelledby="dropdownMenu1">
                                 {
                                     this.state.categories.map(categorie=>{
-                                    return <li key = {categorie.name}  onClick={() => this.setState({name: categorie.name})}> <Link to="/" className ={categorie.name} id={categorie.id}>{categorie.name}</Link> </li>
+                                    return <li key = {categorie.name}  onClick={() =>this.genreSelected( categorie.name, categorie.id) }> <Link to="/present" className ={categorie.name} id={categorie.id}>{categorie.name}</Link> </li>
                                     })
                                 }
                             </ul>
@@ -88,7 +104,8 @@ class Sidebar extends Component{
                             <input type="radio" name="query_category" checked= {this.state.selection === 'movies'} onChange={() => this.changeFilter("movies")} /> Movies    
                             <input type="radio" name="query_category" checked={this.state.selection ==='actors'} className="radio_input" onChange={ ()=> this.changeFilter("actors")} /> Actors
                             <InputField 
-                                query={ (query) => this.setState({user_input:query})}
+                                query={ this.props.userInput}
+                                
                             />
                         </div>
                     </div>

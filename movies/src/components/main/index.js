@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import logo from "../../assets/logo1.png"
-import { Box,Loader, Sandwich, Sidebar } from '../../components'
+import { Box,Loader, Results , Navbar } from '../../components'
 import { Link } from 'react-router-dom'
 import './main.css'
 
@@ -37,16 +37,18 @@ class Main extends Component{
 
     }
 
-    //handle the hamburger icon
-    handleHamburgerClick = () =>{
-        this.setState({showingSideBar: !this.state.showingSideBar})
-    }
 
     //change filter
     changefilter = (e) =>{
         this.setState({ filterName:e.target.name , filtering:e.target.id, isLoaderOn:true})
         this.setMovies(e.target.id)
         
+    }
+    userInputupdate = (query) =>{
+        this.props.userInput(query)
+        
+        //transfer to present screen
+        this.props.history.push("/present")
     }
 
     render(){
@@ -55,64 +57,39 @@ class Main extends Component{
                 <div className="main_container">
                     <div className="header">
                         <div className="brands">
-                            <nav className="navbar navbar-default">
-                                <div className="container-fluid">
-                                    <Sandwich 
-                                        show={this.state.showingSideBar}
-                                        handleClick = {this.handleHamburgerClick}
-                                    />
-                                    <Sidebar 
-                                        show={this.state.showingSideBar}
-                                        categories={this.props.categories}
-                                    />
-                                    <div className="navbar-header">
-                                        <a className="navbar-brand" >
-                                            <span>movie</span>
-                                            <img src={logo} alt="logo img"/>
-                                            <span>gram</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </nav>
+                            <Navbar
+                                categories = {this.props.categories}
+                                title="Box office time ..."
+                                selectedId={this.props.selectedId}
+                                userInput = {this.userInputupdate}
+                                prop ={this.props}
+                            />
                         </div>
                         <div className="user_options">
-                            <div className="title">
-                                <p>Box office time ...</p>
-                                <div className="dropdown_selection">
-                                    <div className="form-group">
-                                        <div className="dropdown">
-                                            <button className="btn filtered dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                {this.state.filterName}
-                                                <span className="caret"></span>
-                                            </button>
-                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <li onClick={this.changefilter}><a id="popular" name="Popular">Popular</a></li>
-                                                <li onClick={this.changefilter}><a id="now_playing" name="Now Playing">Now Playing</a></li>
-                                                <li onClick={this.changefilter}><a id="top_rated" name="Top Rated">Top rated</a></li>
-                                                <li onClick={this.changefilter}><a id="upcoming" name="Upcoming">Upcoming</a></li>
-                                            </ul>
-                                        </div>
+                            <div className="dropdown_selection">
+                                <div className="form-group">
+                                    <div className="dropdown">
+                                        <button className="btn filtered dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            {this.state.filterName}
+                                            <span className="caret"></span>
+                                        </button>
+                                        <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li onClick={this.changefilter}><a id="popular" name="Popular">Popular</a></li>
+                                            <li onClick={this.changefilter}><a id="now_playing" name="Now Playing">Now Playing</a></li>
+                                            <li onClick={this.changefilter}><a id="top_rated" name="Top Rated">Top rated</a></li>
+                                            <li onClick={this.changefilter}><a id="upcoming" name="Upcoming">Upcoming</a></li>
+                                        </ul>
                                     </div>
-                                </div> 
-                            </div>
+                                </div>
+                            </div> 
                         </div>
                     </div> 
                     
                     <div className="results">
                     <Loader show={this.state.isLoaderOn} />
-                    {
-                        
-                        this.state.data.map( (movie,index)=>{
-                            return <div key={index} className="movies_slides">
-                                        <Box  
-                                            title = {movie.title}
-                                            date= {movie.release_date}
-                                            image = { `http://image.tmdb.org/t/p/w185//${movie.poster_path}`}
-                                        />
-                                    </div>
-                        })
-    
-                    }
+                    <Results
+                        data={this.state.data}
+                    />
                     </div>
                 </div>
             );

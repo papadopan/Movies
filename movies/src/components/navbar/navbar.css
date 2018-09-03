@@ -1,0 +1,29 @@
+.header_nav{
+    display: flex;
+    height: 20vh;
+    background: #141414;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    width: 100%;   
+}
+.logo_img{
+    width: 100%;
+    order: 1;
+    flex: 1;
+    display: flex;
+    justify-content: center
+}
+.header_title{
+    order: 2;
+    flex:1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    margin-top: 40px
+}
+
+
+
