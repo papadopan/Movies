@@ -1,0 +1,6 @@
+export { default as Welcome}  from './welcome'
+export { default as Main} from './main'
+export { default as Box} from './box'
+export { default as Loader} from './loader'
+export { default as Sandwich} from './sandwich'
+export { default as Sidebar} from './sidebar'

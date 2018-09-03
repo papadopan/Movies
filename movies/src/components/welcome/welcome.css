@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Shrikhand');
+.index_view .cross_button{
+  display: none;
+}
+.index_view{
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  background-image: url('../../assets/back1.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.navbar{
+  border-radius: 0;
+  position: relative;
+  border: 0;
+  background: transparent;
+}
+.navbar-header{
+  position: absolute;
+  left: 49%;
+  transform: translateX(-49%);
+}
+.navbar-brand span{
+  font-size: 1.2em;
+  color: #ffffff;
+  font-family : Shrikhand;
+}
+.navbar-brand img{
+  height: 80px;
+  width: 80px;
+}
+.welcome{
+  margin: auto;
+  display: flex;
+  flex-flow: column;
+}
+.welcome p{
+  font-family: Helvetica;
+  font-size: 5em;
+  font-weight: bolder;
+  color: #ffffff;
+  text-align: center;
+}
+.button_search{
+  margin: auto;
+  border-radius: 10px;
+  padding: 10px;
+  width: 200px;
+  letter-spacing: 2px;
+  font-family: Helvetica;
+  font-size: 1em;
+  background: inherit;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  text-align: center;
+}
+.button_search:hover{
+  background: #ffffff;
+  color: black;
+}
+.button_search a:hover{
+  text-decoration: none;
+}
+
+/*media queries*/
+@media only screen and (max-width: 1200px){
+  .welcome p{
+    font-size: 4em;
+  }
+
+}
+@media only screen and (max-width: 992px){
+  .welcome p{
+    font-size: 3em;
+  }
+  .navbar-brand img{
+    height: 60px;
+    width: 60px;
+  }
+
+}
+@media only screen and (max-width: 480px){
+  .welcome p{
+    font-size: 3em;
+  }
+  .navbar-brand span{
+    font-size: 1em;
+  }
+  .navbar-brand img{
+    height: 50px;
+    width: 50px;
+  }
+}
+@media only screen and (max-width: 320px){
+  .welcome p{
+    font-size: 2em;
+  }
+  .navbar-brand span{
+    font-size: 1em;
+  }
+  .navbar-brand img{
+    height: 50px;
+    width: 50px;
+  }
+}
