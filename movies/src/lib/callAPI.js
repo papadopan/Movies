@@ -15,6 +15,7 @@ const url_maker = (filter, num) =>{
 }
 
 
+
 const MOVIE_API = fetch =>({
     fetchMovies : (filter, num)  => fetch( url_maker(filter, num))
                                     .then(response => response.json()),
@@ -25,6 +26,8 @@ const MOVIE_API = fetch =>({
                                 .then(response=> response.json()),
     fetchMovie : (name) => fetch('https://api.themoviedb.org/3/search/movie?api_key=f35de773b53c4803aa0d72b2f16794f4&language=en-US&query='+ name )
                                 .then(response => response.json()) 
+                                
+                                
 
 })
 

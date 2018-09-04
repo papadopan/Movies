@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import TextField from 'material-ui/TextField'
 import './sidebar.css'
-import PlacesAirportShuttle from 'material-ui/SvgIcon';
+
 
 class InputField extends Component{
 

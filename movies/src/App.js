@@ -14,7 +14,8 @@ class App extends Component {
     super(props)
     this.state={
       selectedId:undefined,
-      title:''
+      title:'',
+      names:[]
     }
   }
 
@@ -26,6 +27,30 @@ class App extends Component {
 
   componentDidMount(){
       this.fetchMovie(this.state.query).then(movie=> console.log(movie))
+  }
+
+  update = (query) =>{
+    this.setState({query:query,title:query})
+
+    var name = this.state.names.slice();
+    this.fetchMovie(query).then( movie => {
+        
+          movie.results.map( movie=>{
+            
+            let new_name= movie.title
+            name.push(new_name)
+            
+          })
+          console.log(name)
+          this.setState({names:name})
+          this.SetThem(name)
+    })
+
+
+  }
+  SetThem = ( name ) =>{
+      console.log(name)
+      console.log(this.state.names)
   }
   render() {
     return (
@@ -40,7 +65,8 @@ class App extends Component {
                       selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
                       userQuery = {this.state.query}
                       title ={ this.state.title}
-                      userInput = { query => this.setState({query:query,title:query})}
+                      // userInput = { query => this.setState({query:query,title:query})}
+                      userInput = { this.update}
                       {...props}
                     />
                   )}/>
@@ -54,6 +80,7 @@ class App extends Component {
                       title ={ this.state.title}
                       selection = {this.state.selection}
                       movie = {this.fetchMovie}
+
                       {...props}
                     />
                   )}/>

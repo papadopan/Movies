@@ -19,8 +19,7 @@ class Present extends Component{
         if (this.props.selection === 'genre')
             this.setGenreContent(this.props.userQuery)
         else
-            this.setMovieContent(this.props.userQuery)    
-        
+            this.setMovieContent(this.props.userQuery)       
     }
 
     // Set Movie Content
