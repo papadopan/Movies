@@ -25,7 +25,9 @@ const MOVIE_API = fetch =>({
     fetchSpecificGenre: (genre_id) => fetch('https://api.themoviedb.org/3/genre/'+ genre_id +'/movies?api_key=f35de773b53c4803aa0d72b2f16794f4&language=en-US&include_adult=false&page=1')
                                 .then(response=> response.json()),
     fetchMovie : (name) => fetch('https://api.themoviedb.org/3/search/movie?api_key=f35de773b53c4803aa0d72b2f16794f4&language=en-US&query='+ name )
-                                .then(response => response.json()) 
+                                .then(response => response.json()) ,
+    fetchMovieInfos : (id) => fetch(' https://api.themoviedb.org/3/movie/'+ id +'?api_key=f35de773b53c4803aa0d72b2f16794f4')
+                                .then(response=> response.json())
                                 
                                 
 

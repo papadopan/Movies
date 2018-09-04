@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Welcome , Main, Present } from './components'
+import { Welcome , Main, Present, View } from './components'
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
@@ -24,34 +24,14 @@ class App extends Component {
   fetchCategories = MOVIE_CALL.fetchCategories
   fetchGenreList = MOVIE_CALL.fetchSpecificGenre
   fetchMovie = MOVIE_CALL.fetchMovie
+  fetchMovieInfo = MOVIE_CALL.fetchMovieInfos
 
   componentDidMount(){
-      this.fetchMovie(this.state.query).then(movie=> console.log(movie))
+      this.fetchMovieInfo(399360).then(movie=> console.log(movie))
   }
 
-  update = (query) =>{
-    this.setState({query:query,title:query})
-
-    var name = this.state.names.slice();
-    this.fetchMovie(query).then( movie => {
-        
-          movie.results.map( movie=>{
-            
-            let new_name= movie.title
-            name.push(new_name)
-            
-          })
-          console.log(name)
-          this.setState({names:name})
-          this.SetThem(name)
-    })
 
 
-  }
-  SetThem = ( name ) =>{
-      console.log(name)
-      console.log(this.state.names)
-  }
   render() {
     return (
             <MuiThemeProvider>
@@ -65,8 +45,9 @@ class App extends Component {
                       selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
                       userQuery = {this.state.query}
                       title ={ this.state.title}
-                      // userInput = { query => this.setState({query:query,title:query})}
-                      userInput = { this.update}
+                      userInput = { query => this.setState({query:query,title:query})}
+                      saveFilter = {(filter) => console.log(filter)}
+                      movieId={(id) => this.setState({chosenMovieId: id})}
                       {...props}
                     />
                   )}/>
@@ -80,10 +61,26 @@ class App extends Component {
                       title ={ this.state.title}
                       selection = {this.state.selection}
                       movie = {this.fetchMovie}
-
+                      names={this.state.names}
+                      saveFilter = {(filter) => console.log(filter)}
+                      movieId={(id) => this.setState({chosenMovieId: id})}
                       {...props}
                     />
                   )}/>
+                  <Route path="/view" render={ (props) =>(
+                    <View
+                      categories = {this.fetchCategories}
+                      selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
+                      userQuery = {this.state.query}
+                      title ="Antonis"
+                      userInput = { query => this.setState({query:query,title:query})}
+                      saveFilter = {(filter) => console.log(filter)}
+                      chosenId={this.state.chosenMovieId}
+                      infos={this.fetchMovieInfo}
+                      {...props}
+                      />
+                  )}
+                  />
                 </Switch>
               </BrowserRouter>
             </MuiThemeProvider>

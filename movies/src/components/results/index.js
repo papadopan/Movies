@@ -14,7 +14,9 @@ class Results extends Component{
                                 <Box  
                                     title = {movie.title}
                                     date= {movie.release_date}
-                                    image = { `http://image.tmdb.org/t/p/w185//${movie.poster_path}`}
+                                    id={movie.id}
+                                    image = { `http://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+                                    movieId={this.props.movieId}
                                 />
                             </div>
                 })

@@ -62,7 +62,7 @@ class Main extends Component{
                                 title="Box office time ..."
                                 selectedId={this.props.selectedId}
                                 userInput = {this.userInputupdate}
-                                prop ={this.props}
+                                saveFilter = {(filter) => this.props.saveFilter(filter)}
                             />
                         </div>
                         <div className="user_options">
@@ -89,6 +89,7 @@ class Main extends Component{
                     <Loader show={this.state.isLoaderOn} />
                     <Results
                         data={this.state.data}
+                        movieId={this.props.movieId}
                     />
                     </div>
                 </div>

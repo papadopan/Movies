@@ -35,16 +35,16 @@ class InputField extends Component{
         return(
             <div>
             <TextField
-            floatingLabelText=" Search  . . . "  
-            floatingLabelStyle={styles.floatingLabelStyle}
-            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-            underlineFocusStyle={styles.floatingLabelStyle}
-            inputStyle={styles.floatingLabelFocusStyle}
-            onChange={(e) => this.setState({query:e.target.value})}
-            onKeyPress={this.Pressed}
+                floatingLabelText=" Search  . . . "  
+                floatingLabelStyle={styles.floatingLabelStyle}
+                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                underlineFocusStyle={styles.floatingLabelStyle}
+                inputStyle={styles.floatingLabelFocusStyle}
+                onChange={(e) => this.setState({query:e.target.value})}
+                onKeyPress={this.Pressed}
             />
             <Link to ="/present">
-                <button onClick={this.send}> Antonis</button>
+                <button onClick={this.send}> Search</button>
             </Link>
             </div>
         );
@@ -60,7 +60,8 @@ class Sidebar extends Component{
             categories:[],
             name: 'Select Genre',
             selection:'movies',
-            selected_id:undefined
+            selected_id:undefined,
+            
         }
     }
 
@@ -73,6 +74,8 @@ class Sidebar extends Component{
     // set the query category movies or actors
     changeFilter = (filter) =>{
         this.setState({selection:filter})
+        this.props.saveFilter(filter)
+        
     }
 
     // when select the specific genre
@@ -100,12 +103,9 @@ class Sidebar extends Component{
                             </ul>
                         </div>
                         <div className="search">
-                            <p className="profile_text">Looking for :</p>
-                            <input type="radio" name="query_category" checked= {this.state.selection === 'movies'} onChange={() => this.changeFilter("movies")} /> Movies    
-                            <input type="radio" name="query_category" checked={this.state.selection ==='actors'} className="radio_input" onChange={ ()=> this.changeFilter("actors")} /> Actors
+                            <p className="profile_text">Looking for :</p>                            
                             <InputField 
-                                query={ this.props.userInput}
-                                
+                                query={ this.props.userInput}  
                             />
                         </div>
                     </div>

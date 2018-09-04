@@ -16,6 +16,18 @@ class Navbar extends Component{
     handleHamburgerClick = () =>{
         this.setState({showingSideBar: !this.state.showingSideBar})
     }
+
+    // update present component
+    updateUserInput = ( query ) =>{
+        this.handleHamburgerClick()
+
+        this.props.userInput(query)
+    }
+    // update selected id
+    updateSelectedId = (name, id)=>{
+        this.props.selectedId(name, id)
+        this.handleHamburgerClick();
+    }
     render(){
         return(
             <div className="header_nav">
@@ -36,11 +48,13 @@ class Navbar extends Component{
                     show={this.state.showingSideBar}
                     handleClick = {this.handleHamburgerClick}
                 /> 
+                
                 <Sidebar 
                     show={this.state.showingSideBar}
                     categories={this.props.categories}
-                    userInput = {this.props.userInput}
-                    selectedId = {this.props.selectedId}
+                    userInput = {this.updateUserInput}
+                    selectedId = {this.updateSelectedId}
+                    saveFilter = {(filter) => this.props.saveFilter(filter)}
                     
                 />          
             </div>

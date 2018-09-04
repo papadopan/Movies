@@ -19,8 +19,10 @@ class Present extends Component{
         if (this.props.selection === 'genre')
             this.setGenreContent(this.props.userQuery)
         else
-            this.setMovieContent(this.props.userQuery)       
+            this.setMovieContent(this.props.userQuery)    
     }
+
+    
 
     // Set Movie Content
     setMovieContent = (query) =>{
@@ -78,11 +80,13 @@ class Present extends Component{
                         title={this.props.title}
                         selectedId={this.updateContent}
                         userInput = {this.userInputupdate}
+                        saveFilter = {(filter) => this.props.saveFilter(filter)}
                     />
                     <div className="results">
                     <Loader show={this.state.isLoaderOn} />
                     <Results
                         data={this.state.data}
+                        movieId={this.props.movieId}
                     />
                     
                     </div>
