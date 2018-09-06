@@ -44,7 +44,7 @@ class InputField extends Component{
                 onKeyPress={this.Pressed}
             />
             <Link to ="/present">
-                <button onClick={this.send}> Search</button>
+                <button onClick={this.send} className="button_search"> Search</button>
             </Link>
             </div>
         );

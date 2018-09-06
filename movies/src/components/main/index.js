@@ -90,6 +90,8 @@ class Main extends Component{
                     <Results
                         data={this.state.data}
                         movieId={this.props.movieId}
+                        myMovies={this.props.myMovies}
+                        handleUserClick = {this.props.handleUserClick}
                     />
                     </div>
                 </div>

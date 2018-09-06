@@ -17,7 +17,7 @@ class View extends Component{
     }
 
     componentDidMount(){
-        this.props.infos( this.props.chosenId )
+        this.props.infos( this.props.match.params.movieID )
             .then( movie=> this.setState({
                 title: movie.original_title,
                 votes: movie.vote_average,

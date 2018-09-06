@@ -10,6 +10,7 @@ class Results extends Component{
             {
                 
                 this.props.data.map( (movie,index)=>{
+                
                     return <div key={index} className="movies_slides">
                                 <Box  
                                     title = {movie.title}
@@ -17,6 +18,8 @@ class Results extends Component{
                                     id={movie.id}
                                     image = { `http://image.tmdb.org/t/p/w185/${movie.poster_path}`}
                                     movieId={this.props.movieId}
+                                    myMovies={this.props.myMovies}
+                                    handleUserClick = {this.props.handleUserClick}
                                 />
                             </div>
                 })

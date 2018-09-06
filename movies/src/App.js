@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Welcome , Main, Present, View } from './components'
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import firebase from './firebase.js'
 import './App.css';
 
 import MOVIES from './lib/callAPI'
@@ -27,7 +28,77 @@ class App extends Component {
   fetchMovieInfo = MOVIE_CALL.fetchMovieInfos
 
   componentDidMount(){
-      this.fetchMovieInfo(399360).then(movie=> console.log(movie))
+    this.fetchFirebaseData()
+
+  }
+
+  // make the connection with the firebase database
+  fetchFirebaseData = () =>{
+    const itemsRef = firebase.database().ref('movies_list')
+    itemsRef.on('value', (snapshot) => {
+    let items = snapshot.val();
+    let movies = []
+    let uids = []
+    
+    
+    for (let item in items)
+    {
+      movies.push(items[item].data)
+
+    }
+  
+    for (let item in items)
+    {
+      uids.push(items[item].uid)
+    }
+
+    this.setState({
+        myMovies:movies,
+        moviesIDS:uids
+    })
+
+    });
+
+  }
+
+  // handle user like/dislike click
+  handleUserClick = (id, target) =>{
+
+    if ( target === "delete"){
+      let uid = this.state.moviesIDS[this.state.myMovies.indexOf(id)]
+      firebase.database().ref().child('/movies_list/' + uid).remove();
+    }
+
+    if( target === "add"){
+      // add id to the state
+      let movies = this.state.myMovies.slice()
+      movies.push(id)
+
+      this.setState({myMovies:movies})
+
+      // update the firebase
+
+      var uid = firebase.database().ref().child('movies_list').push().key
+
+      var data ={
+        uid : uid,
+        data : id,
+        category : "mymovies",
+        stars : 1,
+        comments:[""],
+        tag : "all"
+      }
+
+      this.setState({moviesIDS: uid})
+
+      // send data
+      var updates = {}
+      updates['/movies_list/'+uid] = data
+      firebase.database().ref().update(updates)
+
+    }
+    
+    
   }
 
 
@@ -48,6 +119,8 @@ class App extends Component {
                       userInput = { query => this.setState({query:query,title:query})}
                       saveFilter = {(filter) => console.log(filter)}
                       movieId={(id) => this.setState({chosenMovieId: id})}
+                      myMovies={this.state.myMovies}
+                      handleUserClick = {this.handleUserClick}
                       {...props}
                     />
                   )}/>
@@ -64,10 +137,12 @@ class App extends Component {
                       names={this.state.names}
                       saveFilter = {(filter) => console.log(filter)}
                       movieId={(id) => this.setState({chosenMovieId: id})}
+                      myMovies={this.state.myMovies}
+                      handleUserClick = {this.handleUserClick}
                       {...props}
                     />
                   )}/>
-                  <Route path="/view" render={ (props) =>(
+                  <Route path="/view/:movieID" render={ (props) =>(
                     <View
                       categories = {this.fetchCategories}
                       selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}

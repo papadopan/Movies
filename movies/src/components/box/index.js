@@ -9,36 +9,45 @@ class Box extends Component{
     constructor(props){
         super(props)
         this.state={
-            movie_id:this.props.id
+            movie_id:this.props.id,
         }
     }
     sendMovieId = () =>{
         this.props.movieId( this.state.movie_id )
     }
+    IconButtonHandle = (e) =>{
+         // check if the image already exists
+         if ( this.props.myMovies.indexOf(e.target.id) === -1)
+            this.props.handleUserClick(e.target.id , "add")
+        else    
+            this.props.handleUserClick(e.target.id, "delete")
+
+    }
     render(){
         return(
-            <Link to="/view">
                 <div className="card" id={this.props.id} onClick={this.sendMovieId}>
-                    <div className="card_image">
-                        <img src={this.props.image} alt="movie theater"/>
-                    </div>
+                    <Link to={`view/${this.props.id}`} style={{ textDecoration: 'none', color:'#FFFFF' }}>
+                        <div className="card_image">
+                            <img src={this.props.image} alt="movie theater"/>
+                        </div>
+                    </Link>
                     <div className="card_title">
                         <p>{this.props.title}</p>
                         <p>{this.props.date}</p>
-                    </div>
+                    </div>            
                     <div className="card_button">
                     <IconButton 
-                        onClick={(e) => this.ButtonHandle(e)}  
+                        onClick={(e) => this.IconButtonHandle(e)}  
                         className="favourite"
                     >
-                        <FontIcon  className="material-icons "  color = "#962A38" >
+                        <FontIcon  className="material-icons " id={this.props.id} color = {this.props.myMovies.includes( this.props.id.toString()) ? "#962A38" : "#FFFF"}>
                             favorite
                         </FontIcon>      
                     </IconButton>
                     
                     </div>
                 </div>    
-            </Link>
+            
         );
     }
 }
