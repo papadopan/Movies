@@ -103,6 +103,11 @@ class App extends Component {
     
     
   }
+  deleteFromMovies = (id) =>{
+    let uid = this.state.moviesIDS[this.state.myMovies.indexOf(id)]
+    firebase.database().ref().child('/movies_list/' + uid).remove();
+
+  }
 
   render() {
     return (
@@ -165,6 +170,7 @@ class App extends Component {
                       userQuery = {this.state.query}
                       myMovies= {this.state.myMovies}
                       fetchMovieInfo = {this.fetchMovieInfo}
+                      deleteId={this.deleteFromMovies}
                       {...props}
                     />
                   )}

@@ -28,13 +28,28 @@ class ProfileBox extends Component{
         console.log(this.props.movie[index])
         
     }
+    // Drag and Drop
+
+    // save the id of the box which started to drag
+    onDragStart = (e) =>{
+        this.setState({ dragId : e.target.id})
+        this.props.drag(e.target.id)
+    }
+    onDragOver = (e) =>
+    {
+        e.preventDefault();
+    }
 
     render(){
-        console.log(this.props.movie)
         return(
-                <div className="presentBox">
+                <div 
+                    className="presentBox"
+                    draggable
+                    onDragStart ={ (e) => this.onDragStart(e)}
+                    onDragOver = { (e)=>this.onDragOver(e)}
+                    >
                     <div className="moviePoster">
-                        <img src={`http://image.tmdb.org/t/p/w185/${this.props.movie.poster_path}`} className="moviePosterSpecs" alt=""/>
+                        <img src={`http://image.tmdb.org/t/p/w185/${this.props.movie.poster_path}`} id={this.props.movie.id} className="moviePosterSpecs" alt=""/>
                     </div>
                     <div className="movieStars">
                         <StarRatingComponent
@@ -44,7 +59,6 @@ class ProfileBox extends Component{
                             starColor="#962A38"
                             editing={true}
                             onStarClick={this.handleStars.bind(this)} 
-
                         />
                     </div>
                     <div className="movieOverview">

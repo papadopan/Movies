@@ -1,8 +1,9 @@
 import React , { Component } from 'react'
 import { Navbar, ProfileBox} from '../../components'
+import FontAwesome from 'react-fontawesome'
 import './profile.css'
 import firebase from '../../firebase'
-import ModalComponent from '../modal';
+
 
 class Profile extends Component{
     constructor(props){
@@ -91,6 +92,14 @@ class Profile extends Component{
     })
   
     }
+
+    onDrop = (e)=>{
+        this.props.deleteId(this.state.dragId)
+    }
+    onDragOver = (e) =>
+    {
+        e.preventDefault();
+    }
     render(){
         return(
             <div>
@@ -110,10 +119,22 @@ class Profile extends Component{
                                 movie={movie}
                                 index={index}
                                 handleModal={this.handleModal}   
+                                drag={(id) =>this.setState({dragId:id})}
                                 />
                     })
                 }
                 </div>
+              
+               <div 
+                    className="trash" 
+                    onDrop = {(e) => this.onDrop(e)}
+                    onDragOver = {(e)=>this.onDragOver(e)}>
+                    <FontAwesome
+                        className="far fa-trash-alt"
+                        size="2x"
+                        name="trash"
+                    />
+               </div>
             </div>
         );
     }

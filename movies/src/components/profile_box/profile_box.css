@@ -9,10 +9,6 @@
     display: flex;
     flex-flow: column;
   }
-  .movieShow{
-    padding: 20px;
-  }
-
   .moviePosterSpecs{
     height: 100%;
     width: 100%;

@@ -20,6 +20,19 @@ class ModalComponent extends Component{
        this.setState({movie:this.props.movie, show:this.props.show, inputComment:""})
 
     }
+    // delete comment 
+    commentTrash = (e) =>{
+        
+        var comments = this.props.movie.comments
+
+        if( e.target.id>0 && e.target.id < comments.length)
+        {
+          comments.splice(e.target.id , 1)
+        }
+        
+      
+        firebase.database().ref('movies_list/'+ this.props.movie.firebase_ids).update({comments : comments})
+    }
     //handle comment input
     handleCommentInput = (e) =>{
         this.setState({inputComment: e.target.value})
@@ -76,7 +89,7 @@ class ModalComponent extends Component{
                 <Modal.Body className="modalBody">
                     {
                         this.props.movie.comments.map((comment, index)=>{
-                            return  <div key={index} className="modalCommentBox" >
+                            return  <div key={index} className={index > 0 ?"modalCommentBox" :'none'}  >
                                         <p  className="modalComments">{comment}</p>
                                         <div className="commentTrash">
                                             <IconButton 
