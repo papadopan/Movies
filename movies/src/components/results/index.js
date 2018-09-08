@@ -8,9 +8,7 @@ class Results extends Component{
         return(
             <div className="results">
             {
-                
-                this.props.data.map( (movie,index)=>{
-                
+                this.props.data.map( (movie,index)=>{   
                     return <div key={index} className="movies_slides">
                                 <Box  
                                     title = {movie.title}

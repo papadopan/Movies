@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Welcome , Main, Present, View } from './components'
+import { Welcome , Main, Present, View, Profile } from './components'
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import firebase from './firebase.js'
@@ -56,6 +56,8 @@ class App extends Component {
         myMovies:movies,
         moviesIDS:uids
     })
+    
+    localStorage.setItem("myMovies", movies)
 
     });
 
@@ -75,6 +77,7 @@ class App extends Component {
       movies.push(id)
 
       this.setState({myMovies:movies})
+
 
       // update the firebase
 
@@ -100,8 +103,6 @@ class App extends Component {
     
     
   }
-
-
 
   render() {
     return (
@@ -155,6 +156,19 @@ class App extends Component {
                       {...props}
                       />
                   )}
+                  />
+                  <Route path="/profile" render={ (props) =>(
+                    <Profile 
+                      categories = {this.fetchCategories}
+                      selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
+                      userInput = { query => this.setState({query:query,title:query})}
+                      userQuery = {this.state.query}
+                      myMovies= {this.state.myMovies}
+                      fetchMovieInfo = {this.fetchMovieInfo}
+                      {...props}
+                    />
+                  )}
+                  
                   />
                 </Switch>
               </BrowserRouter>

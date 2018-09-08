@@ -46,6 +46,9 @@ class InputField extends Component{
             <Link to ="/present">
                 <button onClick={this.send} className="button_search"> Search</button>
             </Link>
+            <Link to ="/profile">
+                <button onClick={this.send} className="mt50"> profile</button>
+            </Link>
             </div>
         );
     }

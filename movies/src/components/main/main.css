@@ -89,6 +89,16 @@
   background: #141414;
   color: #962A38
 }
+.pagination{
+  order: 3;
+  flex: 1;
+  padding: 5px;
+  margin-top: 5px;
+  display: flex;
+}
+.pagination > div {
+  margin: auto;
+}
 /* media */
 
 @media only screen and (max-width: 992px){

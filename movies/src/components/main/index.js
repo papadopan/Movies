@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import logo from "../../assets/logo1.png"
-import { Box,Loader, Results , Navbar } from '../../components'
+import { Box,Loader, Results , Navbar, Paginate } from '../../components'
+import Pagination from "react-js-pagination"
 import { Link } from 'react-router-dom'
 import './main.css'
 
@@ -20,12 +21,12 @@ class Main extends Component{
     //set to the state
     componentDidMount(){
         // set the loader on
-        this.setState({isLoaderOn:true, error:false})
+        this.setState({isLoaderOn:true,filtering:'upcoming' ,error:false})
         // set movies to the state
-        this.setMovies( this.state.filtering)
+        this.setMovies( this.state.filtering , 1)
     }
-    setMovies = (filter) =>{
-        this.props.fetchingMovies(filter)
+    setMovies = (filter, page_number) =>{
+        this.props.fetchingMovies(filter, page_number)
         .then( movie => this.setState({
             total_results : movie.total_results,
             total_pages : movie.total_pages,
@@ -49,6 +50,15 @@ class Main extends Component{
         
         //transfer to present screen
         this.props.history.push("/present")
+    }
+    //pagination handle
+    handlePageChange = (page_number) =>
+    {
+        this.setState({active_page:page_number, isLoaderOn:true})
+        
+        // update the movies content
+        this.setMovies( this.state.filtering, page_number)
+        
     }
 
     render(){
@@ -93,6 +103,17 @@ class Main extends Component{
                         myMovies={this.props.myMovies}
                         handleUserClick = {this.props.handleUserClick}
                     />
+                    </div>
+                    <div className="pagination">
+                        <div>
+                            <Pagination
+                            activePage={this.state.active_page}
+                            itemsCountPerPage={21}
+                            totalItemsCount={this.state.total_results}
+                            pageRangeDisplayed={5}
+                            onChange={this.handlePageChange}
+                            />
+                        </div> 
                     </div>
                 </div>
             );
