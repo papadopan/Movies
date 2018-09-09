@@ -1,8 +1,9 @@
 import React , { Component } from 'react'
-import { Navbar, ProfileBox} from '../../components'
+import { Navbar, ProfileBox, Stats} from '../../components'
 import FontAwesome from 'react-fontawesome'
 import './profile.css'
 import firebase from '../../firebase'
+import MapsLocalMovies from 'material-ui/SvgIcon';
 
 
 class Profile extends Component{
@@ -62,11 +63,10 @@ class Profile extends Component{
         this.setState({
             time : 0,
             tags : tags,
-
             movies:[],
+            allMovies:[],
             infos:[]
-          })
-          
+          })          
         movies.map( id =>{
             this.props.fetchMovieInfo(id.data).then( movie =>{
 
@@ -78,13 +78,14 @@ class Profile extends Component{
                 movie.stars=id.stars
                 movie.tag = id.tag
                 movie.comments = id.comments
+                movie.allTags= tags
 
                 //add the new movie 
                 movies.push(movie)
 
 
                 //upodate the state
-                this.setState({movies:movies})
+                this.setState({movies:movies, allMovies:movies})
             })
         })
         
@@ -100,6 +101,24 @@ class Profile extends Component{
     {
         e.preventDefault();
     }
+
+    // update showing movies
+    updateShowingMovies = (tag) =>{
+        if (tag !== "all"){
+            let newMovies=[]
+            for (let i in this.state.allMovies){
+                if( this.state.allMovies[i].tag === tag)
+                    newMovies.push(this.state.allMovies[i])
+            }
+    
+            this.setState({movies: newMovies})
+
+        }else{
+            this.setState({movies:this.state.allMovies})   
+        }
+
+
+    }
     render(){
         return(
             <div>
@@ -109,6 +128,10 @@ class Profile extends Component{
                     selectedId={this.props.selectedId}
                     userInput = {this.userInputHandle}
                     saveFilter = {(filter) => this.props.saveFilter(filter)}
+                />
+                <Stats 
+                    tags={this.state.tags}
+                    updateShowingMovies={this.updateShowingMovies}
                 />
                <div className="results movieShow">
                

@@ -1,9 +1,10 @@
 import React , { Component } from 'react'
 import StarRatingComponent from 'react-star-rating-component'
 import RaisedButton from 'material-ui/RaisedButton'
-import { ModalComponent } from '../../components'
+import { ModalComponent, PopOver } from '../../components'
 import './profile_box.css'
 import firebase from '../../firebase'
+
 
 class ProfileBox extends Component{
 
@@ -15,7 +16,7 @@ class ProfileBox extends Component{
     }
 
     componentDidMount(){
-        this.setState({openModal:false})
+        this.setState({openModal:false, showPopOver:false})
     }
 
     //handle star rating system
@@ -38,6 +39,12 @@ class ProfileBox extends Component{
     onDragOver = (e) =>
     {
         e.preventDefault();
+    }
+    // update movie tag
+    tagUpdate = (tag, firebaseId) =>{
+        if(tag.replace(/\s/g, '').length !== 0 || tag!=="")
+            firebase.database().ref('movies_list/'+ firebaseId).update({tag : tag})
+        this.setState({showPopOver:false})
     }
 
     render(){
@@ -67,7 +74,15 @@ class ProfileBox extends Component{
                             <RaisedButton
                                 label="tags +"
                                 buttonStyle={{background:"#962A38"}}
+                                onClick={ (e) =>this.setState({showPopOver:true, anchorEl:e.currentTarget})}
                             />  
+                            <PopOver
+                                movie={this.props.movie}
+                                show={this.state.showPopOver}
+                                anchorEl={this.state.anchorEl}
+                                tagUpdate={this.tagUpdate}
+                                onRequestClose={()=>this.setState({showPopOver:false})}
+                            />
                         </div>
                         <div className="tagName">
                             <p>tag: {this.props.movie.tag}</p>
