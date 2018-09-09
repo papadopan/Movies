@@ -22,8 +22,9 @@ class Main extends Component{
     componentDidMount(){
         // set the loader on
         this.setState({isLoaderOn:true,filtering:'upcoming' ,error:false})
+
         // set movies to the state
-        this.setMovies( this.state.filtering , 1)
+        this.setMovies( this.state.filtering, 1)
     }
     setMovies = (filter, page_number) =>{
         this.props.fetchingMovies(filter, page_number)

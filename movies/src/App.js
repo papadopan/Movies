@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Welcome , Main, Present, View, Profile } from './components'
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import firebase from './firebase.js'
-import './App.css';
+import './App.css'
 
 import MOVIES from './lib/callAPI'
 
@@ -28,8 +28,15 @@ class App extends Component {
   fetchMovieInfo = MOVIE_CALL.fetchMovieInfos
 
   componentDidMount(){
-    this.fetchFirebaseData()
-
+    if ( localStorage.getItem("myMovies"))
+    {
+        this.setState({
+          myMovies:JSON.parse(localStorage.getItem("myMovies")),
+          moviesIDS:JSON.parse(localStorage.getItem("myUids"))
+      })
+    }
+    else
+      this.fetchFirebaseData()
   }
 
   // make the connection with the firebase database
@@ -56,8 +63,10 @@ class App extends Component {
         myMovies:movies,
         moviesIDS:uids
     })
-    
-    localStorage.setItem("myMovies", movies)
+
+
+    localStorage.setItem("myMovies", JSON.stringify(movies))
+    localStorage.setItem("myUids" , JSON.stringify(uids))
 
     });
 
@@ -69,6 +78,8 @@ class App extends Component {
     if ( target === "delete"){
       let uid = this.state.moviesIDS[this.state.myMovies.indexOf(id)]
       firebase.database().ref().child('/movies_list/' + uid).remove();
+
+      
     }
 
     if( target === "add"){
@@ -77,6 +88,8 @@ class App extends Component {
       movies.push(id)
 
       this.setState({myMovies:movies})
+
+      localStorage.setItem("myMovies", JSON.stringify(movies))
 
 
       // update the firebase
@@ -92,7 +105,12 @@ class App extends Component {
         tag : "all"
       }
 
-      this.setState({moviesIDS: uid})
+      // add uid to the state
+      let uids = this.state.moviesIDS.slice();
+      uids.push(uid)
+
+      this.setState({moviesIDS: uids})
+      localStorage.setItem("myUids" , JSON.stringify(uids))
 
       // send data
       var updates = {}

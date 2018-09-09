@@ -12,6 +12,7 @@ class Box extends Component{
             movie_id:this.props.id,
         }
     }
+
     sendMovieId = () =>{
         this.props.movieId( this.state.movie_id )
     }
