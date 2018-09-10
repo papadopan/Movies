@@ -21,8 +21,8 @@ class Profile extends Component{
         this.props.history.push('/present')
     }
     componentDidMount(){
-        this.fetchFirebaseData()
         this.setState({openModal:false})
+        this.fetchFirebaseData()  
     }
     
     // fetch data from firebase
@@ -65,16 +65,40 @@ class Profile extends Component{
             movies:[],
             allMovies:[],
             infos:[],
+            allGenres:[],
             moviesNumber: movies.length
           })
-          let length = 0;          
+          let length = 0; 
+                   
         movies.map( id =>{
             
             this.props.fetchMovieInfo(id.data).then( movie =>{
 
                 // instance of the state
                 let movies = this.state.movies.slice()
-            
+
+                // instance of genres
+                let genres = this.state.allGenres.slice();
+
+                // all the genres in one array 
+                movie.genres.map( genre=>{
+                    genres.push(genre.name)
+                })
+
+                // most common genre
+                let max =-1;
+                let maxGenre =""
+                for ( let i in genres){
+                    let count =0;
+                    for (let j=i;j<genres.length;j++){
+                        if( genres[i] === genres[j] )
+                            count++;
+                        if( count > max){
+                            max= count;
+                            maxGenre= genres[i]
+                        } 
+                    }
+                }
                 // calculate the length time for the profile 
                 length+=movie.runtime
 
@@ -88,8 +112,9 @@ class Profile extends Component{
                 //add the new movie 
                 movies.push(movie)
 
+
                 //upodate the state
-                this.setState({movies:movies, allMovies:movies, moviesLength:length, allMoviesLength:length})
+                this.setState({movies:movies, allMovies:movies, moviesLength:length, allMoviesLength:length, allGenres:genres, maxGenre: maxGenre})
             })
         })
         
@@ -100,6 +125,7 @@ class Profile extends Component{
 
     onDrop = (e)=>{
         this.props.deleteId(this.state.dragId)
+        this.setState({maxGenre:'not movies yet', moviesLength:'0'})
     }
     onDragOver = (e) =>
     {
@@ -139,6 +165,7 @@ class Profile extends Component{
                 <Stats
                     number ={this.state.moviesNumber}
                     time={this.state.moviesLength}
+                    genre={this.state.maxGenre }
                 />
                 <Filtering 
                     tags={this.state.tags}

@@ -13,7 +13,7 @@ class Stats extends Component{
             </div>
             <div className="movieFavouriteGenre">
                 <div>
-                    <p className="numbers">Animation</p>
+                    <p className="numbers">{this.props.genre}</p>
                     <p>favourite genre</p>
                 </div>
             </div>
