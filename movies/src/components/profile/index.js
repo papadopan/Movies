@@ -64,13 +64,19 @@ class Profile extends Component{
             tags : tags,
             movies:[],
             allMovies:[],
-            infos:[]
-          })          
+            infos:[],
+            moviesNumber: movies.length
+          })
+          let length = 0;          
         movies.map( id =>{
+            
             this.props.fetchMovieInfo(id.data).then( movie =>{
 
                 // instance of the state
                 let movies = this.state.movies.slice()
+            
+                // calculate the length time for the profile 
+                length+=movie.runtime
 
                 // push firebase data to every object
                 movie.firebase_ids = id.uid
@@ -82,9 +88,8 @@ class Profile extends Component{
                 //add the new movie 
                 movies.push(movie)
 
-
                 //upodate the state
-                this.setState({movies:movies, allMovies:movies})
+                this.setState({movies:movies, allMovies:movies, moviesLength:length, allMoviesLength:length})
             })
         })
         
@@ -105,15 +110,18 @@ class Profile extends Component{
     updateShowingMovies = (tag) =>{
         if (tag !== "all"){
             let newMovies=[]
+            let length = 0
             for (let i in this.state.allMovies){
-                if( this.state.allMovies[i].tag === tag)
+                if( this.state.allMovies[i].tag === tag){
                     newMovies.push(this.state.allMovies[i])
+                    length+=this.state.allMovies[i].runtime
+                }
             }
     
-            this.setState({movies: newMovies})
+            this.setState({movies: newMovies, moviesNumber:newMovies.length, moviesLength:length})
 
         }else{
-            this.setState({movies:this.state.allMovies})   
+            this.setState({movies:this.state.allMovies, moviesNumber:this.state.allMovies.length, moviesLength:this.state.allMoviesLength})   
         }
 
 
@@ -129,6 +137,8 @@ class Profile extends Component{
                     saveFilter = {(filter) => this.props.saveFilter(filter)}
                 />
                 <Stats
+                    number ={this.state.moviesNumber}
+                    time={this.state.moviesLength}
                 />
                 <Filtering 
                     tags={this.state.tags}

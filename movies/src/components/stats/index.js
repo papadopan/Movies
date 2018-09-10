@@ -6,12 +6,23 @@ class Stats extends Component{
         return (
             <div className="profileStats">
             <div className="movieNum">
-                <p>30</p>
-                <p>movie#</p>
-
+                <div>
+                    <p className="numbers">{this.props.number}</p>
+                    <p>#movies</p>
+                </div>
             </div>
-            <div className="movieFavouriteGenre"></div>
-            <div className="movieRuntime"></div>
+            <div className="movieFavouriteGenre">
+                <div>
+                    <p className="numbers">Animation</p>
+                    <p>favourite genre</p>
+                </div>
+            </div>
+            <div className="movieRuntime">
+                <div>
+                    <p className="numbers">{this.props.time} mins</p>
+                    <p>watch time</p>
+                </div>
+            </div>
             
             </div>
 
