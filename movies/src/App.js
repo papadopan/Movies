@@ -76,10 +76,8 @@ class App extends Component {
   handleUserClick = (id, target) =>{
 
     if ( target === "delete"){
-      let uid = this.state.moviesIDS[this.state.myMovies.indexOf(id)]
-      firebase.database().ref().child('/movies_list/' + uid).remove();
-
-      
+      //delete from movies
+      this.deleteFromMovies(id)      
     }
 
     if( target === "add"){
@@ -124,6 +122,24 @@ class App extends Component {
   deleteFromMovies = (id) =>{
     let uid = this.state.moviesIDS[this.state.myMovies.indexOf(id)]
     firebase.database().ref().child('/movies_list/' + uid).remove();
+
+      // update the movies and the local storage
+      let movies = this.state.myMovies.slice();
+      let uids = this.state.moviesIDS.slice();
+      let idIndex = this.state.myMovies.indexOf(id)
+
+      // remove this specific id from the arrays
+      if (idIndex > -1){
+        movies.splice( idIndex , 1)
+        uids.splice( idIndex, 1)
+      }
+
+      this.setState({myMovies:movies})
+      this.setState({moviesIDS:uids})
+
+      //update the local storage
+      localStorage.setItem("myMovies", JSON.stringify(movies))
+      localStorage.setItem("myUids" , JSON.stringify(uids))
 
   }
 
