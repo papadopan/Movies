@@ -1,6 +1,25 @@
-.statsBar{
+.profileStats{
     height: 10vh;
-    background: #141414;  
     display: flex;
+}
+.movieNum{
+    order: 1;
+    flex: 1;
+    border-right: 1px solid black;
+    display: flex;
+    flex-flow: column;
     justify-content: center;
+    align-items: center
+}
+.movieNum p{
+    
+}
+.movieFavouriteGenre{
+    order: 2;
+    flex:1;
+    border-right: 1px solid black;
+}
+.movieRuntime{
+    order: 3;
+    flex: 1;
 }

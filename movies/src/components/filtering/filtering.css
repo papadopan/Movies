@@ -1,0 +1,6 @@
+.statsBar{
+    height: 10vh;
+    background: #141414;  
+    display: flex;
+    justify-content: center;
+}

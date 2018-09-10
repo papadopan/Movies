@@ -21,10 +21,11 @@ class Main extends Component{
     //set to the state
     componentDidMount(){
         // set the loader on
-        this.setState({isLoaderOn:true,filtering:'upcoming' ,error:false})
+        this.setState({isLoaderOn:true,filterName: localStorage.getItem("selectedFilterName") ? localStorage.getItem("selectedFilterName") : 'Upcoming' ,error:false})
+           
 
         // set movies to the state
-        this.setMovies( this.state.filtering, 1)
+        this.setMovies( localStorage.getItem("selectedFilter") ? localStorage.getItem("selectedFilter") : "upcoming" , 1)
     }
     setMovies = (filter, page_number) =>{
         this.props.fetchingMovies(filter, page_number)
@@ -44,6 +45,8 @@ class Main extends Component{
     changefilter = (e) =>{
         this.setState({ filterName:e.target.name , filtering:e.target.id, isLoaderOn:true})
         this.setMovies(e.target.id)
+        localStorage.setItem("selectedFilter", e.target.id)
+        localStorage.setItem("selectedFilterName", e.target.name)
         
     }
     userInputupdate = (query) =>{

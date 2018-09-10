@@ -1,9 +1,8 @@
 import React , { Component } from 'react'
-import { Navbar, ProfileBox, Stats} from '../../components'
+import { Navbar, ProfileBox, Filtering, Stats} from '../../components'
 import FontAwesome from 'react-fontawesome'
 import './profile.css'
 import firebase from '../../firebase'
-import MapsLocalMovies from 'material-ui/SvgIcon';
 
 
 class Profile extends Component{
@@ -129,7 +128,9 @@ class Profile extends Component{
                     userInput = {this.userInputHandle}
                     saveFilter = {(filter) => this.props.saveFilter(filter)}
                 />
-                <Stats 
+                <Stats
+                />
+                <Filtering 
                     tags={this.state.tags}
                     updateShowingMovies={this.updateShowingMovies}
                 />

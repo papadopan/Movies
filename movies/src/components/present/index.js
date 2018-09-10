@@ -16,10 +16,10 @@ class Present extends Component{
         this.setState({isLoaderOn:true})
 
         // set the content, decide which api call to make 
-        if (this.props.selection === 'genre')
-            this.setGenreContent(this.props.userQuery)
+        if (localStorage.getItem("SidebarSearch") === 'genre')
+            this.setGenreContent(localStorage.getItem("GenreId"))
         else
-            this.setMovieContent(this.props.userQuery)    
+            this.setMovieContent(localStorage.getItem("searchTitle"))    
     }
 
     
@@ -77,7 +77,7 @@ class Present extends Component{
                 <div>
                     <Navbar 
                         categories = {this.props.categories}
-                        title={this.props.title}
+                        title={localStorage.getItem("searchTitle")}
                         selectedId={this.updateContent}
                         userInput = {this.userInputupdate}
                         saveFilter = {(filter) => this.props.saveFilter(filter)}

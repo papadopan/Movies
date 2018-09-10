@@ -85,6 +85,16 @@ class Sidebar extends Component{
     genreSelected = (name , id) =>{
         this.setState({name: name, selected_id:id})
         this.props.selectedId(name, id)
+        
+        // set the local storage
+        localStorage.setItem("searchTitle", name)
+        localStorage.setItem("GenreId", id)
+        localStorage.setItem("SidebarSearch", "genre")
+    }
+    inputInserted = (input) =>{
+        this.props.userInput(input)
+        localStorage.setItem("SidebarSearch", "userInputMovie")
+        localStorage.setItem("searchTitle", input)
     }
     render(){
         return(
@@ -108,7 +118,7 @@ class Sidebar extends Component{
                         <div className="search">
                             <p className="profile_text">Looking for :</p>                            
                             <InputField 
-                                query={ this.props.userInput}  
+                                query={ this.inputInserted}  
                             />
                         </div>
                     </div>
