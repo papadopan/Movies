@@ -19,7 +19,7 @@ class Present extends Component{
         if (localStorage.getItem("SidebarSearch") === 'genre')
             this.setGenreContent(localStorage.getItem("GenreId"))
         else
-            this.setMovieContent(localStorage.getItem("MovieName"))    
+            this.setMovieContent(localStorage.getItem("searchTitle"))    
     }
 
     
@@ -72,6 +72,7 @@ class Present extends Component{
         // update the content
         this.setMovieContent(query)
     }
+
     render(){
         return(
                 <div>

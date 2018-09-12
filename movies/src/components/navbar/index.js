@@ -2,6 +2,7 @@ import React , { Component } from 'react'
 import './navbar.css'
 import { Sandwich, Sidebar } from '../../components'
 import logo from "../../assets/logo1.png"
+import {Link} from 'react-router-dom'
 
 class Navbar extends Component{
 
@@ -33,11 +34,13 @@ class Navbar extends Component{
             <div className="header_nav">
 
                 <div className="logo_img">
-                    <a className="navbar-brand" >
-                        <span>movie</span>
-                        <img src={logo} alt="logo img"/>
-                        <span>gram</span>
-                    </a>
+                    <Link to="/main">
+                        <a className="navbar-brand" >
+                            <span>movie</span>
+                            <img src={logo} alt="logo img"/>
+                            <span>gram</span>
+                        </a>
+                    </Link>
                     
                 </div>
                 <div className="header_title">

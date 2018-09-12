@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import TextField from 'material-ui/TextField'
+import logo from "../../assets/logo1.png"
+import user from "../../assets/user.png"
 import './sidebar.css'
 
 
@@ -45,9 +47,6 @@ class InputField extends Component{
             />
             <Link to ="/present">
                 <button onClick={this.send} className="button_search"> Search</button>
-            </Link>
-            <Link to ="/profile">
-                <button  className="mt50"> profile</button>
             </Link>
             </div>
         );
@@ -100,6 +99,11 @@ class Sidebar extends Component{
         return(
             <div className={this.props.show ? 'sidenavbar move' : 'sidenavbar'}>      
                 <div className="searches">
+                    <div className="profileIcon">
+                        <Link to="/profile">
+                            <img src={user} alt="profile user"/>
+                        </Link>
+                    </div>
                     <div className="form-group">
                         <p className="profile_text">I am interested in</p>
                         <div className="dropdown genres">

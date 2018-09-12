@@ -26,6 +26,7 @@ class App extends Component {
   fetchGenreList = MOVIE_CALL.fetchSpecificGenre
   fetchMovie = MOVIE_CALL.fetchMovie
   fetchMovieInfo = MOVIE_CALL.fetchMovieInfos
+  fetchRecommended = MOVIE_CALL.fetchRecommended
 
   componentDidMount(){
     if ( localStorage.getItem("myMovies"))
@@ -189,6 +190,7 @@ class App extends Component {
                       saveFilter = {(filter) => console.log(filter)}
                       chosenId={this.state.chosenMovieId}
                       infos={this.fetchMovieInfo}
+                      fetchRecommended = {this.fetchRecommended}
                       {...props}
                       />
                   )}

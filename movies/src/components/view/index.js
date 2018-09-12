@@ -12,20 +12,29 @@ class View extends Component{
     constructor(props){
         super(props)
         this.state={
-            
+            recommendedMovies:[]
         }
     }
 
     componentDidMount(){
+        this.fetchInfos()
+        this.fetchRecommendations()
+    }
+    fetchInfos =()=>{
         this.props.infos( this.props.match.params.movieID )
-            .then( movie=> this.setState({
-                title: movie.original_title,
-                votes: movie.vote_average,
-                budget: movie.budget,
-                time: movie.runtime,
-                image:`http://image.tmdb.org/t/p/w185/${movie.poster_path}`,
-                overview:movie.overview
-            }) ) 
+        .then( movie=> this.setState({
+            title: movie.original_title,
+            votes: movie.vote_average,
+            budget: movie.budget,
+            time: movie.runtime,
+            image:`http://image.tmdb.org/t/p/w185/${movie.poster_path}`,
+            overview:movie.overview
+        }) )
+    }
+
+    fetchRecommendations = () =>{
+        this.props.fetchRecommended ( this.props.match.params.movieID )
+        .then(response=>  this.setState({recommendedMovies:response.results}))
     }
 
     userInputupdate = (query) =>{
@@ -34,6 +43,7 @@ class View extends Component{
         //transfer to present screen
         this.props.history.push("/present")
     }
+
     render(){
         return(
             <div>
@@ -77,18 +87,15 @@ class View extends Component{
                                 <Carousel
                                 indicators={false}
                                 interval={2000}
-                                
                                 >
-                                    <Carousel.Item>
-                                        <img width={500} height={500} alt="900x500" src={logo} />
-                                    </Carousel.Item>
-                                    <Carousel.Item>
-                                        <img width={500} height={500} alt="900x500" src={logo}/>
-                                    </Carousel.Item>
-                                    <Carousel.Item>
-                                        <img width={500} height={500} alt="900x500" src={logo} />
-                                    </Carousel.Item>
-                                    </Carousel>;
+                                    {
+                                        this.state.recommendedMovies.map( (movie, index) =>{
+                                            return     <Carousel.Item key={index}>
+                                                        <img width={500} height={500} alt="900x500" src={`http://image.tmdb.org/t/p/w185/${movie.poster_path}`} />
+                                                        </Carousel.Item>
+                                        })
+                                    }
+                                </Carousel>
                             </div>
                         </div>
                     </div>
