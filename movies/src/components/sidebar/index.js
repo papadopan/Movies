@@ -47,7 +47,7 @@ class InputField extends Component{
                 <button onClick={this.send} className="button_search"> Search</button>
             </Link>
             <Link to ="/profile">
-                <button onClick={this.send} className="mt50"> profile</button>
+                <button  className="mt50"> profile</button>
             </Link>
             </div>
         );
@@ -85,8 +85,8 @@ class Sidebar extends Component{
     genreSelected = (name , id) =>{
         this.setState({name: name, selected_id:id})
         this.props.selectedId(name, id)
-        
-        // set the local storage
+        console.log(name)
+        // set the local storage    
         localStorage.setItem("searchTitle", name)
         localStorage.setItem("GenreId", id)
         localStorage.setItem("SidebarSearch", "genre")

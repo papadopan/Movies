@@ -80,44 +80,41 @@ class App extends Component {
       this.deleteFromMovies(id)      
     }
 
-    if( target === "add"){
-      // add id to the state
-      let movies = this.state.myMovies.slice()
-      movies.push(id)
+    if( target === "add" && id !== "" && id !== " "){
+        // add id to the state
+        let movies = this.state.myMovies.slice()
+        movies.push(id)
 
-      this.setState({myMovies:movies})
+        this.setState({myMovies:movies})
 
-      localStorage.setItem("myMovies", JSON.stringify(movies))
+        localStorage.setItem("myMovies", JSON.stringify(movies))
 
 
-      // update the firebase
+        // update the firebase
 
-      var uid = firebase.database().ref().child('movies_list').push().key
+        var uid = firebase.database().ref().child('movies_list').push().key
 
-      var data ={
-        uid : uid,
-        data : id,
-        category : "mymovies",
-        stars : 1,
-        comments:[""],
-        tag : "all"
+        var data ={
+          uid : uid,
+          data : id,
+          category : "mymovies",
+          stars : 1,
+          comments:[""],
+          tag : "all"
+        }
+
+        // add uid to the state
+        let uids = this.state.moviesIDS.slice();
+        uids.push(uid)
+
+        this.setState({moviesIDS: uids})
+        localStorage.setItem("myUids" , JSON.stringify(uids))
+
+        // send data
+        var updates = {}
+        updates['/movies_list/'+uid] = data
+        firebase.database().ref().update(updates)
       }
-
-      // add uid to the state
-      let uids = this.state.moviesIDS.slice();
-      uids.push(uid)
-
-      this.setState({moviesIDS: uids})
-      localStorage.setItem("myUids" , JSON.stringify(uids))
-
-      // send data
-      var updates = {}
-      updates['/movies_list/'+uid] = data
-      firebase.database().ref().update(updates)
-
-    }
-    
-    
   }
   deleteFromMovies = (id) =>{
     let uid = this.state.moviesIDS[this.state.myMovies.indexOf(id)]

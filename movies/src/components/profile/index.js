@@ -79,7 +79,7 @@ class Profile extends Component{
 
                 // instance of genres
                 let genres = this.state.allGenres.slice();
-
+                
                 // all the genres in one array 
                 movie.genres.map( genre=>{
                     genres.push(genre.name)
