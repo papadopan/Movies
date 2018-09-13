@@ -1,0 +1,57 @@
+.modal{
+    background: rgba(255,255,255,.7);
+    color:#962A38;
+}
+.modalHeader{
+    background: black;
+    color: #962A38;
+    padding: 5%;
+    border-bottom: 3px solid #962A38
+}
+.modalBody{
+    background: black;
+    color: #962A38;
+    
+}
+.modalComments{
+    color: #FFFFFF
+}
+.modalCommentBox{
+    border: 1px solid #962A38;
+    padding:9px;
+    border-radius: 25px;
+    text-align: center;
+    position: relative;
+}
+.commentTrash{
+    position: absolute;
+    right: 0;
+    bottom: 50%;
+    transform: translateY(50%)
+}
+.none{
+    display: none;
+}
+.modal-content{
+    background: black;
+    border:0;
+   
+}
+.modalFooter{
+    background: black;
+    display: flex;
+    flex-flow: column;
+    min-height: 10vh;
+}
+.insertComment{
+    order: 1;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.modal_buttons{
+    order: 2;
+    flex: 1;
+    display: flex;
+    justify-content: center
+}

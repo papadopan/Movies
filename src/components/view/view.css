@@ -1,0 +1,151 @@
+.movie_details{
+    display: flex;
+    min-height: 100vh;
+    flex-flow: column;
+}
+.movie_infos{
+    order: 1;
+    height: 50vh;
+    display: flex;
+}
+.movie_poster{
+    order: 1;
+    flex:1;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie_poster img{
+    max-width: 500px;
+    max-height: 500px;
+}
+.movie_more{
+    order:2;
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+}
+.stats{
+    order: 2;
+    flex: 1;
+    min-height: 20vh;
+    display: flex;
+    background: #141414;
+    color: #FFFFFF;
+}
+.time{
+    order: 1;
+    flex:1;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+.stars{
+    order: 2;
+    flex:1;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+.money{
+    order: 3;
+    flex:1;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.recommendations{
+    order: 3;
+    flex:2;
+    display: flex;
+    flex-flow: column
+}
+.recommend_title{
+    order: 1;
+    height: 20vh;
+    background: #141414;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.recommend_title span{
+    letter-spacing: 1px;
+    font-size: 3em;
+}
+.carousel{
+    order: 2;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon{
+    height: 60px;
+    width: 60px;
+    margin-bottom: 5px;
+    display: block
+
+}
+.movie_overview{
+    width: 50%;
+    color: #FFFFFF;
+    font-size: 1.2em;
+}
+.movie_overview:first-letter
+{
+    float:left;
+    padding-top:4px;
+    padding-right:8px;
+    padding-left:3px;
+    font-family:Georgia;
+    font-size:40px;
+    line-height:30px;
+    color:#141414
+}
+
+/**********************************************************************/
+/**********************************************************************/
+/* media queries*/
+/**********************************************************************/
+/**********************************************************************/
+
+@media only screen and (max-width: 1200px){
+}
+@media only screen and (max-width: 992px){
+    .movie_overview{
+        font-size: 1.2em;
+    }
+}
+@media only screen and (max-width: 768px){
+    .movie_overview{
+        font-size: 1.1em;
+        width: 70%;
+    }
+    .recommend_title span{
+        font-size: 2em;
+    }
+ 
+}
+@media only screen and (max-width: 480px){
+    .movie_overview{
+        font-size: 1em;
+        width: 80%;
+    }
+
+}
+@media only screen and (max-width: 320px){
+    .movie_overview{
+        font-size: .7em;
+    }
+ 
+}
