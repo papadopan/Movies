@@ -26,7 +26,8 @@ class InputField extends Component{
         const styles = {
             floatingLabelStyle: {
               color: "#fff",
-              borderColor: "#962A38"
+              borderColor: "#962A38",
+              fontFamily:'Helvetica Neue'
             },
             floatingLabelFocusStyle: {
               color: "#962A38",

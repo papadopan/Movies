@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './present.css'
-
+import {Link} from 'react-router-dom'
 import { Navbar, Results , Loader} from '../../components'
 
 
@@ -8,12 +8,13 @@ class Present extends Component{
     constructor(props){
         super(props)
         this.state={
-            data:[]
+            data:[],
+            error:false
         }
     }
 
     componentDidMount(){
-        this.setState({isLoaderOn:true})
+        this.setState({isLoaderOn:true, error:false})
 
         // set the content, decide which api call to make 
         if (localStorage.getItem("SidebarSearch") === 'genre')
@@ -74,7 +75,8 @@ class Present extends Component{
     }
 
     render(){
-        return(
+        if( !this.state.error){
+            return(
                 <div>
                     <Navbar 
                         categories = {this.props.categories}
@@ -96,6 +98,23 @@ class Present extends Component{
                     
                 </div>
         );
+
+        }
+        else{
+            return(
+                <div className="main_container">
+                    <div className="error_message">
+                    <span >Our service is unavailable now, please visit us another time </span>
+                    <Link to="/">
+                        <button className="home_button">home</button>
+                    </Link>
+                </div>
+ 
+                </div>
+            );
+            
+        }
+
     }
 }
 

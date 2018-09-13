@@ -35,11 +35,11 @@ class Navbar extends Component{
 
                 <div className="logo_img">
                     <Link to="/main">
-                        <a className="navbar-brand" >
+                        <div className="navbar-brand" >
                             <span>movie</span>
                             <img src={logo} alt="logo img"/>
                             <span>gram</span>
-                        </a>
+                        </div>
                     </Link>
                     
                 </div>

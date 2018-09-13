@@ -24,6 +24,29 @@
     color: #FFFFFF;
     margin-top: 40px
 }
+.header_title span{
+    font-size: 3em;
+    letter-spacing: 1px;
+}
+/**********************************************************************/
+/**********************************************************************/
+/* media queries*/
+/**********************************************************************/
+/**********************************************************************/
+
+@media only screen and (max-width: 1200px){
+}
+@media only screen and (max-width: 992px){
+}
+@media only screen and (max-width: 768px){
+    .header_title span{
+        font-size: 2.5em;
+    }
+}
+@media only screen and (max-width: 480px){
+}
+@media only screen and (max-width: 320px){
+}
 
 
 

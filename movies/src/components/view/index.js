@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 import { Navbar} from '../../components'
-import logo from '../../assets/antonio.jpg'
+import { Link} from 'react-router-dom'
 import star from '../../assets/star.png'
 import time from '../../assets/time.png'
 import money from '../../assets/money.png'
@@ -12,11 +12,13 @@ class View extends Component{
     constructor(props){
         super(props)
         this.state={
-            recommendedMovies:[]
+            recommendedMovies:[],
+            error:false
         }
     }
 
     componentDidMount(){
+        this.setState({error:false})
         this.fetchInfos()
         this.fetchRecommendations()
     }
@@ -30,11 +32,13 @@ class View extends Component{
             image:`http://image.tmdb.org/t/p/w185/${movie.poster_path}`,
             overview:movie.overview
         }) )
+        .catch(error => this.setState({error:true}))
     }
 
     fetchRecommendations = () =>{
         this.props.fetchRecommended ( this.props.match.params.movieID )
         .then(response=>  this.setState({recommendedMovies:response.results}))
+        .catch(error=> this.setState({error:true}))
     }
 
     userInputupdate = (query) =>{
@@ -45,63 +49,78 @@ class View extends Component{
     }
 
     render(){
-        return(
-            <div>
-                <Navbar  
-                categories = {this.props.categories}
-                title={this.state.title}
-                selectedId={this.props.selectedId}
-                userInput = {(query) => this.userInputupdate(query)}
-                saveFilter = {(filter) => this.props.saveFilter(filter)}
-                />
-                <div className="movie_details">
-                    <div className="movie_infos">
-                        <div className="movie_poster">
-                            <img src={this.state.image} alt="movie poster"/>
-                        </div>
-                        <div className="movie_more">
-                            <p className="movie_overview">{this.state.overview}</p>
-                        </div>
-                    </div>
-                    <div className="stats">
-                        <div className="time">
-                            <img src={time} alt="minutes" className="icon"/>
-                            <p> {this.state.time}</p>
-                        </div>
-                        <div className="stars">
-                            <img src={star} alt="minutes" className="icon"/>
-                            <p>{this.state.votes}</p>
-                        </div>
-                        <div className="money">
-                            <img src={money} alt="minutes" className="icon"/>
-                            <p> {this.state.budget}</p>
-                        </div>
-
-                    </div>
-                    <div className="recommendations">
-                        <div className="recommend_title">
-                            <span>recommended movies ...</span>
-                        </div>
-                        <div className="carousel">                            
-                             <div>
-                                <Carousel
-                                indicators={false}
-                                interval={2000}
-                                >
-                                    {
-                                        this.state.recommendedMovies.map( (movie, index) =>{
-                                            return     <Carousel.Item key={index}>
-                                                        <img width={500} height={500} alt="900x500" src={`http://image.tmdb.org/t/p/w185/${movie.poster_path}`} />
-                                                        </Carousel.Item>
-                                        })
-                                    }
-                                </Carousel>
+        if( !this.state.error){
+            return(
+                <div>
+                    <Navbar  
+                    categories = {this.props.categories}
+                    title={this.state.title}
+                    selectedId={this.props.selectedId}
+                    userInput = {(query) => this.userInputupdate(query)}
+                    saveFilter = {(filter) => this.props.saveFilter(filter)}
+                    />
+                    <div className="movie_details">
+                        <div className="movie_infos">
+                            <div className="movie_poster">
+                                <img src={this.state.image} alt="movie poster"/>
+                            </div>
+                            <div className="movie_more">
+                                <p className="movie_overview">{this.state.overview}</p>
                             </div>
                         </div>
-                    </div>
-                </div>     
-            </div>
-        );
+                        <div className="stats">
+                            <div className="time">
+                                <img src={time} alt="minutes" className="icon"/>
+                                <p> {this.state.time}</p>
+                            </div>
+                            <div className="stars">
+                                <img src={star} alt="minutes" className="icon"/>
+                                <p>{this.state.votes}</p>
+                            </div>
+                            <div className="money">
+                                <img src={money} alt="minutes" className="icon"/>
+                                <p> {this.state.budget}</p>
+                            </div>
+
+                        </div>
+                        <div className="recommendations">
+                            <div className="recommend_title">
+                                <span>recommended movies ...</span>
+                            </div>
+                            <div className="carousel">                            
+                                <div>
+                                    <Carousel
+                                    indicators={false}
+                                    interval={2000}
+                                    >
+                                        {
+                                            this.state.recommendedMovies.map( (movie, index) =>{
+                                                return     <Carousel.Item key={index}>
+                                                            <img width={500} height={500} alt="900x500" src={`http://image.tmdb.org/t/p/w185/${movie.poster_path}`} />
+                                                            </Carousel.Item>
+                                            })
+                                        }
+                                    </Carousel>
+                                </div>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+            );
+        }
+        else{
+            return(
+                <div className="main_container">
+                <div className="error_message">
+                    <span >Our service is unavailable now, please visit us another time </span>
+                    <Link to="/">
+                        <button className="home_button">home</button>
+                    </Link>
+                </div>
+ 
+                </div>
+            );
+        }
     }
 }
 

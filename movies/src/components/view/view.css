@@ -26,7 +26,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: justify
+    text-align: justify;
 }
 .stats{
     order: 2;
@@ -34,6 +34,7 @@
     min-height: 20vh;
     display: flex;
     background: #141414;
+    color: #FFFFFF;
 }
 .time{
     order: 1;
@@ -75,7 +76,10 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 50px;
-    
+}
+.recommend_title span{
+    letter-spacing: 1px;
+    font-size: 3em;
 }
 .carousel{
     order: 2;
@@ -94,7 +98,8 @@
 }
 .movie_overview{
     width: 50%;
-    color: #FFFFFF
+    color: #FFFFFF;
+    font-size: 1.2em;
 }
 .movie_overview:first-letter
 {
@@ -106,4 +111,41 @@
     font-size:40px;
     line-height:30px;
     color:#141414
+}
+
+/**********************************************************************/
+/**********************************************************************/
+/* media queries*/
+/**********************************************************************/
+/**********************************************************************/
+
+@media only screen and (max-width: 1200px){
+}
+@media only screen and (max-width: 992px){
+    .movie_overview{
+        font-size: 1.2em;
+    }
+}
+@media only screen and (max-width: 768px){
+    .movie_overview{
+        font-size: 1.1em;
+        width: 70%;
+    }
+    .recommend_title span{
+        font-size: 2em;
+    }
+ 
+}
+@media only screen and (max-width: 480px){
+    .movie_overview{
+        font-size: 1em;
+        width: 80%;
+    }
+
+}
+@media only screen and (max-width: 320px){
+    .movie_overview{
+        font-size: .7em;
+    }
+ 
 }

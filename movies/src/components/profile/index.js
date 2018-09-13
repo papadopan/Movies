@@ -1,6 +1,7 @@
 import React , { Component } from 'react'
 import { Navbar, ProfileBox, Filtering, Stats} from '../../components'
 import FontAwesome from 'react-fontawesome'
+import {Link} from 'react-router-dom'
 import './profile.css'
 import firebase from '../../firebase'
 
@@ -13,6 +14,7 @@ class Profile extends Component{
             movies:[],
             names:[],
             infos:[],
+            error:false
         }
     }
     userInputHandle = ( filter )=>{
@@ -21,7 +23,7 @@ class Profile extends Component{
         this.props.history.push('/present')
     }
     componentDidMount(){
-        this.setState({openModal:false})
+        this.setState({openModal:false, error:false})
         this.fetchFirebaseData()  
     }
     
@@ -50,13 +52,14 @@ class Profile extends Component{
 
         // sort movies based on the stars
         function compare(a,b) {
-            if (a.original_title < b.original_title)
+            if (a.tag < b.tag)
               return -1;
-            if (a.original_title > b.original_title)
+            if (a.tag > b.tag)
               return 1;
             return 0;
           }
           movies.sort(compare);
+          console.log(movies)
 
         // clear the state
         this.setState({
@@ -116,6 +119,7 @@ class Profile extends Component{
                 //upodate the state
                 this.setState({movies:movies, allMovies:movies, moviesLength:length, allMoviesLength:length, allGenres:genres, maxGenre: maxGenre})
             })
+            .catch( error => this.setState({error:true}))
         })
         
         
@@ -153,51 +157,66 @@ class Profile extends Component{
 
     }
     render(){
-        return(
-            <div>
-                <Navbar
-                    categories = {this.props.categories}
-                    title="My profile ..."
-                    selectedId={this.props.selectedId}
-                    userInput = {this.userInputHandle}
-                    saveFilter = {(filter) => this.props.saveFilter(filter)}
-                />
-                <Stats
-                    number ={this.state.moviesNumber}
-                    time={this.state.moviesLength}
-                    genre={this.state.maxGenre }
-                />
-                <Filtering 
-                    tags={this.state.tags}
-                    updateShowingMovies={this.updateShowingMovies}
-                />
-               <div className="results movieShow">
-               
-                {
-                    this.state.movies.map( (movie, index)=>{
-                        return <ProfileBox
-                                key={movie.firebase_ids}
-                                movie={movie}
-                                index={index}
-                                handleModal={this.handleModal}   
-                                drag={(id) =>this.setState({dragId:id})}
-                                />
-                    })
-                }
-                </div>
-              
-               <div 
-                    className="trash" 
-                    onDrop = {(e) => this.onDrop(e)}
-                    onDragOver = {(e)=>this.onDragOver(e)}>
-                    <FontAwesome
-                        className="far fa-trash-alt"
-                        size="2x"
-                        name="trash"
+        if( !this.state.error){ 
+            return(
+                <div>
+                    <Navbar
+                        categories = {this.props.categories}
+                        title="My profile"
+                        selectedId={this.props.selectedId}
+                        userInput = {this.userInputHandle}
+                        saveFilter = {(filter) => this.props.saveFilter(filter)}
                     />
-               </div>
-            </div>
-        );
+                    <Stats
+                        number ={this.state.moviesNumber}
+                        time={this.state.moviesLength}
+                        genre={this.state.maxGenre }
+                    />
+                    <Filtering 
+                        tags={this.state.tags}
+                        updateShowingMovies={this.updateShowingMovies}
+                    />
+                <div className="results movieShow">
+                
+                    {
+                        this.state.movies.map( (movie, index)=>{
+                            return <ProfileBox
+                                    key={movie.firebase_ids}
+                                    movie={movie}
+                                    index={index}
+                                    handleModal={this.handleModal}   
+                                    drag={(id) =>this.setState({dragId:id})}
+                                    />
+                        })
+                    }
+                    </div>
+                
+                <div 
+                        className="trash" 
+                        onDrop = {(e) => this.onDrop(e)}
+                        onDragOver = {(e)=>this.onDragOver(e)}>
+                        <FontAwesome
+                            className="far fa-trash-alt"
+                            size="2x"
+                            name="trash"
+                        />
+                </div>
+                </div>
+            );
+        }
+        else{
+            return(
+                <div className="main_container">
+                <div className="error_message">
+                    <span >Our service is unavailable now, please visit us another time </span>
+                    <Link to="/">
+                        <button className="home_button">home</button>
+                    </Link>
+                </div>
+ 
+                </div>
+            );
+        }
     }
 }
 export default Profile;
