@@ -16,6 +16,11 @@ class PopOver extends Component{
     handleTagInput = (e) =>{
         console.log(e.target.value)
     }
+    // if enter key is pressed
+    enterKeyPress = (e) =>{
+        if(e.key=== "Enter")
+            this.props.tagUpdate(this.state.newTag, this.props.movie.firebase_ids)
+    }
     render(){
                     
     const styles = {
@@ -72,7 +77,8 @@ class PopOver extends Component{
                     floatingLabelFocusStyle={styles.tagFocusStyle}
                     underlineFocusStyle={styles.tagFocusStyle}
                     inputStyle={styles.tagFocusStyle}
-                    onChange = { (e)=> this.setState({newTag:e.target.value})}          
+                    onChange = { (e)=> this.setState({newTag:e.target.value})}    
+                    onKeyPress={this.enterKeyPress}      
                 />
                 <button type="button" className="btn add_tag_button"  onClick={() => this.props.tagUpdate(this.state.newTag, this.props.movie.firebase_ids)}>a d d</button>   
                 </Popover>

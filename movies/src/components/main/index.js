@@ -115,6 +115,7 @@ class Main extends Component{
                             totalItemsCount={this.state.total_results}
                             pageRangeDisplayed={5}
                             onChange={this.handlePageChange}
+                            hideFirstLastPages={true}
                             />
                         </div> 
                     </div>

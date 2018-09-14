@@ -17,10 +17,16 @@ class Present extends Component{
         this.setState({isLoaderOn:true, error:false})
 
         // set the content, decide which api call to make 
-        if (localStorage.getItem("SidebarSearch") === 'genre')
-            this.setGenreContent(localStorage.getItem("GenreId"))
+        if (localStorage.getItem("SidebarSearch") !== undefined)
+        {
+            if( localStorage.getItem("SidebarSearch") === "genre")
+                this.setGenreContent(localStorage.getItem("GenreId"))
+            else
+                this.setMovieContent(localStorage.getItem("searchTitle")) 
+        }
         else
-            this.setMovieContent(localStorage.getItem("searchTitle"))    
+            this.setState({error:true})
+   
     }
 
     
@@ -28,15 +34,17 @@ class Present extends Component{
     // Set Movie Content
     setMovieContent = (query) =>{
         this.props.movie( query )        
-        .then( movie => this.setState({
+        .then( (movie, index) => this.setState({
             total_results : movie.total_results,
             total_pages : movie.total_pages,
             active_page : movie.page,
+            index:index,
             data: movie.results,
             isLoaderOn:false
         }))
         .catch( () => this.setState({error:true}) )
 
+        
     } 
 
     // Set Genre Content
@@ -75,7 +83,7 @@ class Present extends Component{
     }
 
     render(){
-        if( !this.state.error){
+        if( !this.state.error && this.state.total_results >0){
             return(
                 <div>
                     <Navbar 
@@ -104,8 +112,8 @@ class Present extends Component{
             return(
                 <div className="main_container">
                     <div className="error_message">
-                    <span >Our service is unavailable now, please visit us another time </span>
-                    <Link to="/">
+                    <span >There is a problem with your search, please try again later</span>
+                    <Link to="/main">
                         <button className="home_button">home</button>
                     </Link>
                 </div>
