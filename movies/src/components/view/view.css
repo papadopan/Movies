@@ -138,14 +138,20 @@
 }
 @media only screen and (max-width: 480px){
     .movie_overview{
-        font-size: 1em;
+        font-size: .7em;
         width: 80%;
+        line-height: 1.5;
     }
 
 }
 @media only screen and (max-width: 320px){
     .movie_overview{
-        font-size: .7em;
+        font-size: .6em;
+        width: 100%;
+    }
+    .movie_poster img{
+        width: 150px;
+        height: 200px;
     }
  
 }
