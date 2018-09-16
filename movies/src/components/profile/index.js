@@ -1,5 +1,5 @@
 import React , { Component } from 'react'
-import { Navbar, ProfileBox, Filtering, Stats} from '../../components'
+import { Navbar, ProfileBox, Filtering, Stats, Loader} from '../../components'
 import FontAwesome from 'react-fontawesome'
 import {Link} from 'react-router-dom'
 import './profile.css'
@@ -23,7 +23,7 @@ class Profile extends Component{
         this.props.history.push('/present')
     }
     componentDidMount(){
-        this.setState({openModal:false, error:false})
+        this.setState({openModal:false, error:false, isLoaderOn:true})
         this.fetchFirebaseData()  
     }
     
@@ -59,7 +59,7 @@ class Profile extends Component{
             return 0;
           }
           movies.sort(compare);
-          console.log(movies)
+          
 
         // clear the state
         this.setState({
@@ -117,7 +117,7 @@ class Profile extends Component{
 
 
                 //upodate the state
-                this.setState({movies:movies, allMovies:movies, moviesLength:length, allMoviesLength:length, allGenres:genres, maxGenre: maxGenre})
+                this.setState({movies:movies, allMovies:movies, moviesLength:length, allMoviesLength:length, allGenres:genres, maxGenre: maxGenre, isLoaderOn:false})
             })
             .catch( error => this.setState({error:true}))
         })
@@ -161,6 +161,7 @@ class Profile extends Component{
         if( !this.state.error){ 
             return(
                 <div>
+                    <Loader show={this.state.isLoaderOn} />
                     <Navbar
                         categories = {this.props.categories}
                         title="My profile"
