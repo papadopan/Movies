@@ -69,9 +69,14 @@ class Profile extends Component{
             allMovies:[],
             infos:[],
             allGenres:[],
-            moviesNumber: movies.length
+            moviesNumber: movies.length,
+            isLoaderOn:false,
+            maxGenre:'not movies yet', 
+            moviesLength:'0'
           })
           let length = 0; 
+        
+        
                    
         movies.map( id =>{
             
@@ -130,7 +135,9 @@ class Profile extends Component{
     // when the user drops the movie to the delete area, the movie is automatically removed
     onDrop = (e)=>{
         this.props.deleteId(this.state.dragId)
-        this.setState({isLoaderOn:true, maxGenre:'not movies yet', moviesLength:'0'})
+        
+        if(this.state.allMovies.length !== 1)
+            this.setState({isLoaderOn:true})
     }
     onDragOver = (e) =>
     {
