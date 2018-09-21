@@ -38,7 +38,7 @@ class InputField extends Component{
         return(
             <div>
             <TextField
-                floatingLabelText=" Search  . . . "  
+                floatingLabelText=" Search movies . . . "  
                 floatingLabelStyle={styles.floatingLabelStyle}
                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                 underlineFocusStyle={styles.floatingLabelStyle}

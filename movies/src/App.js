@@ -40,7 +40,7 @@ class App extends Component {
       this.fetchFirebaseData()
   }
 
-  // make the connection with the firebase database
+  // establish the connection with the firebase database
   fetchFirebaseData = () =>{
     const itemsRef = firebase.database().ref('movies_list')
     itemsRef.on('value', (snapshot) => {
@@ -117,6 +117,7 @@ class App extends Component {
         firebase.database().ref().update(updates)
       }
   }
+  // function to delete movies from firebase
   deleteFromMovies = (id) =>{
     let uid = this.state.moviesIDS[this.state.myMovies.indexOf(id)]
     firebase.database().ref().child('/movies_list/' + uid).remove();
