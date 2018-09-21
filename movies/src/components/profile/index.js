@@ -135,9 +135,11 @@ class Profile extends Component{
     // when the user drops the movie to the delete area, the movie is automatically removed
     onDrop = (e)=>{
         this.props.deleteId(this.state.dragId)
+        this.setState({isLoaderOn:true})
         
-        if(this.state.allMovies.length !== 1)
-            this.setState({isLoaderOn:true})
+        if(this.state.allMovies.length === 1)
+            this.setState({isLoaderOn:false, allMoviesLength:0, allMoviesLength:0})
+           
     }
     onDragOver = (e) =>
     {
