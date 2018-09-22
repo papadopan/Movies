@@ -26,5 +26,3 @@ const MOVIE_API = fetch =>({
 })
 
 export default MOVIE_API;
-
-// https://api.themoviedb.org/3/movie/filter?api_key=f35de773b53c4803aa0d72b2f16794f4&language=en-US&page=1
