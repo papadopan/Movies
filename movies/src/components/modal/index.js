@@ -120,7 +120,6 @@ class ModalComponent extends Component{
                         </div>
                     </div>
                 </Modal.Footer>
-
             </Modal>
             
         );

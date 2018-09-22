@@ -1,6 +1,5 @@
 import React , { Component } from 'react'
-import { Navbar} from '../../components'
-import { Link} from 'react-router-dom'
+import { Navbar, Error} from '../../components'
 import star from '../../assets/star.png'
 import time from '../../assets/time.png'
 import money from '../../assets/money.png'
@@ -109,15 +108,7 @@ class View extends Component{
         }
         else{
             return(
-                <div className="main_container">
-                <div className="error_message">
-                    <span >Our service is unavailable now, please visit us another time </span>
-                    <Link to="/">
-                        <button className="home_button">home</button>
-                    </Link>
-                </div>
- 
-                </div>
+                    <Error />
             );
         }
     }
