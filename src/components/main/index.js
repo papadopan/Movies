@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import logo from "../../assets/logo1.png"
-import { Box,Loader, Results , Navbar, Paginate } from '../../components'
+import { Loader, Results , Navbar, Error } from '../../components'
 import Pagination from "react-js-pagination"
-import { Link } from 'react-router-dom'
 import './main.css'
 
 class Main extends Component{
@@ -23,7 +21,6 @@ class Main extends Component{
         // set the loader on
         this.setState({isLoaderOn:true,filterName: localStorage.getItem("selectedFilterName") ? localStorage.getItem("selectedFilterName") : 'Upcoming' ,error:false})
            
-
         // set movies to the state
         this.setMovies( localStorage.getItem("selectedFilter") ? localStorage.getItem("selectedFilter") : "upcoming" , 1)
     }
@@ -39,7 +36,6 @@ class Main extends Component{
         .catch( () => this.setState({error:true}) )
 
     }
-
 
     //change filter
     changefilter = (e) =>{
@@ -115,6 +111,7 @@ class Main extends Component{
                             totalItemsCount={this.state.total_results}
                             pageRangeDisplayed={5}
                             onChange={this.handlePageChange}
+                            hideFirstLastPages={true}
                             />
                         </div> 
                     </div>
@@ -123,15 +120,7 @@ class Main extends Component{
         }
         else{
             return(
-                <div className="main_container">
-                <div className="error_message">
-                    <span >Our service is unavailable now, please visit us another time </span>
-                    <Link to="/">
-                        <button className="home_button">home</button>
-                    </Link>
-                </div>
- 
-                </div>
+                    <Error />
             );
         }
  

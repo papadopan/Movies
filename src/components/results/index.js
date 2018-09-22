@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Loader, Box} from '../../components'
+import { Box} from '../../components'
 import './results.css'
 
 

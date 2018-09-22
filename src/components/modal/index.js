@@ -18,19 +18,15 @@ class ModalComponent extends Component{
 
     componentDidMount(){
        this.setState({movie:this.props.movie, show:this.props.show, inputComment:""})
-
     }
     // delete comment 
-    commentTrash = (e) =>{
-        
+    commentTrash = (e) =>{   
         var comments = this.props.movie.comments
 
         if( e.target.id>0 && e.target.id < comments.length)
         {
           comments.splice(e.target.id , 1)
         }
-        
-      
         firebase.database().ref('movies_list/'+ this.props.movie.firebase_ids).update({comments : comments})
     }
     //handle comment input
@@ -124,7 +120,6 @@ class ModalComponent extends Component{
                         </div>
                     </div>
                 </Modal.Footer>
-
             </Modal>
             
         );

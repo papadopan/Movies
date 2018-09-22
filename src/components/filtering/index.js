@@ -15,23 +15,23 @@ class Filtering extends Component{
                     background:"#962A38",          
                   }}
                 >
-                <MenuItem 
-                      value={-1} 
-                      primaryText="all" 
-                      onClick={() =>this.props.updateShowingMovies("all")}
-                      />
-                    {
-                    this.props.tags === undefined ? "" :
-                    this.props.tags.map( (tag , index)  =>
-                    {
-                        return <MenuItem 
-                                  key={index} 
-                                  value={index} 
-                                  primaryText={tag} 
-                                  onClick={() =>this.props.updateShowingMovies(tag)}
-                                  />
-                      })
-                    }
+                    <MenuItem 
+                        value={-1} 
+                        primaryText="all" 
+                        onClick={() =>this.props.updateShowingMovies("all")}
+                        />
+                        {
+                        this.props.tags === undefined ? "" :
+                        this.props.tags.map( (tag , index)  =>
+                        {
+                            return <MenuItem 
+                                    key={index} 
+                                    value={index} 
+                                    primaryText={tag} 
+                                    onClick={() =>this.props.updateShowingMovies(tag)}
+                                    />
+                        })
+                        }
                 </SelectField>
 
             </div>

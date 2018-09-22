@@ -12,10 +12,12 @@ class Box extends Component{
             movie_id:this.props.id,
         }
     }
-
+    // send the id of the movie which is about to view
     sendMovieId = () =>{
         this.props.movieId( this.state.movie_id )
     }
+
+    // handle the user clicking, deciding whether like it or not
     IconButtonHandle = (e) =>{
          // check if the image already exists
          if ( this.props.myMovies.indexOf(e.target.id) === -1)
