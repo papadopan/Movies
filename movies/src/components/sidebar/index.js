@@ -14,7 +14,6 @@ class Sidebar extends Component{
             selection:'movies',
             selected_id:undefined,
             error:false
-            
         }
     }
 
@@ -34,6 +33,8 @@ class Sidebar extends Component{
         localStorage.setItem("GenreId", id)
         localStorage.setItem("SidebarSearch", "genre")
     }
+
+    // when the user sends the input
     inputInserted = (input) =>{
         this.props.userInput(input)
         localStorage.setItem("SidebarSearch", "userInputMovie")
