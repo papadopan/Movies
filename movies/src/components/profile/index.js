@@ -1,7 +1,6 @@
 import React , { Component } from 'react'
-import { Navbar, ProfileBox, Filtering, Stats, Loader} from '../../components'
+import { Navbar, ProfileBox, Filtering, Stats, Loader, Error} from '../../components'
 import FontAwesome from 'react-fontawesome'
-import {Link} from 'react-router-dom'
 import './profile.css'
 import firebase from '../../firebase'
 
@@ -157,7 +156,6 @@ class Profile extends Component{
                     length+=this.state.allMovies[i].runtime
                 }
             }
-    
             this.setState({movies: newMovies, moviesNumber:newMovies.length, moviesLength:length})
 
         }else{
@@ -186,46 +184,37 @@ class Profile extends Component{
                         tags={this.state.tags}
                         updateShowingMovies={this.updateShowingMovies}
                     />
-                <div className="results movieShow">
-                <Loader show={this.state.isLoaderOn} />
-                
-                    {
-                        this.state.movies.map( (movie, index)=>{
-                            return <ProfileBox
-                                    key={movie.firebase_ids}
-                                    movie={movie}
-                                    index={index}
-                                    handleModal={this.handleModal}   
-                                    drag={(id) =>this.setState({dragId:id})}
-                                    />
-                        })
-                    }
+                    <div className="results movieShow">
+                        <Loader show={this.state.isLoaderOn} />
+                        
+                            {
+                                this.state.movies.map( (movie, index)=>{
+                                    return <ProfileBox
+                                            key={movie.firebase_ids}
+                                            movie={movie}
+                                            index={index}
+                                            handleModal={this.handleModal}   
+                                            drag={(id) =>this.setState({dragId:id})}
+                                            />
+                                })
+                            }
                     </div>
-                
-                <div 
-                        className="trash" 
-                        onDrop = {(e) => this.onDrop(e)}
-                        onDragOver = {(e)=>this.onDragOver(e)}>
-                        <FontAwesome
-                            className="far fa-trash-alt"
-                            size="2x"
-                            name="trash"
-                        />
-                </div>
+                    <div 
+                            className="trash" 
+                            onDrop = {(e) => this.onDrop(e)}
+                            onDragOver = {(e)=>this.onDragOver(e)}>
+                            <FontAwesome
+                                className="far fa-trash-alt"
+                                size="2x"
+                                name="trash"
+                            />
+                    </div>
                 </div>
             );
         }
         else{
             return(
-                <div className="main_container">
-                <div className="error_message">
-                    <span >Our service is unavailable now, please visit us another time </span>
-                    <Link to="/">
-                        <button className="home_button">home</button>
-                    </Link>
-                </div>
- 
-                </div>
+                    <Error />
             );
         }
     }

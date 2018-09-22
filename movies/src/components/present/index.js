@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './present.css'
-import {Link} from 'react-router-dom'
 import { Navbar, Results , Loader, Error} from '../../components'
 
 
@@ -75,19 +74,16 @@ class Present extends Component{
                         title={localStorage.getItem("searchTitle")}
                         selectedId={this.updateContent}
                         userInput = {this.userInputupdate}
-                        saveFilter = {(filter) => this.props.saveFilter(filter)}
                     />
                     <div className="results">
-                    <Loader show={this.state.isLoaderOn} />
-                    <Results
-                        data={this.state.data}
-                        movieId={this.props.movieId}
-                        myMovies={this.props.myMovies}
-                        handleUserClick = {this.props.handleUserClick}
-                    />
-                    
+                        <Loader show={this.state.isLoaderOn} />
+                        <Results
+                            data={this.state.data}
+                            movieId={this.props.movieId}
+                            myMovies={this.props.myMovies}
+                            handleUserClick = {this.props.handleUserClick}
+                        />
                     </div>
-                    
                 </div>
         );
 

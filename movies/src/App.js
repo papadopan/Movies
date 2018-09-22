@@ -151,7 +151,6 @@ class App extends Component {
                       userQuery = {this.state.query}
                       title ={ this.state.title}
                       userInput = { query => this.setState({query:query,title:query})}
-                      saveFilter = {(filter) => console.log(filter)}
                       movieId={(id) => this.setState({chosenMovieId: id})}
                       myMovies={this.state.myMovies}
                       handleUserClick = {this.handleUserClick}
@@ -170,7 +169,6 @@ class App extends Component {
                       selection = {this.state.selection}
                       movie = {this.fetchMovie}
                       names={this.state.names}
-                      saveFilter = {(filter) => console.log(filter)}
                       movieId={(id) => this.setState({chosenMovieId: id})}
                       myMovies={this.state.myMovies}
                       handleUserClick = {this.handleUserClick}
@@ -185,7 +183,6 @@ class App extends Component {
                       userQuery = {this.state.query}
                       title ="Antonis"
                       userInput = { query => this.setState({query:query,title:query})}
-                      saveFilter = {(filter) => console.log(filter)}
                       chosenId={this.state.chosenMovieId}
                       infos={this.fetchMovieInfo}
                       fetchRecommended = {this.fetchRecommended}
