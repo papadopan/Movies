@@ -81,6 +81,7 @@ class View extends Component{
                                 <img src={money} alt="minutes" className="icon"/>
                                 <p> {this.state.budget}</p>
                             </div>
+                            
 
                         </div>
                         <div className="recommendations">

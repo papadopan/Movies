@@ -80,7 +80,7 @@ class Profile extends Component{
                    
         movies.map( id =>{
             
-            this.props.fetchMovieInfo(id.data).then( movie =>{
+           return  this.props.fetchMovieInfo(id.data).then( movie =>{
 
                 // instance of the state
                 let movies = this.state.movies.slice()
@@ -90,7 +90,7 @@ class Profile extends Component{
                 
                 // all the genres in one array 
                 movie.genres.map( genre=>{
-                    genres.push(genre.name)
+                    return genres.push(genre.name)
                 })
 
                 // most common genre
@@ -138,7 +138,7 @@ class Profile extends Component{
         this.setState({isLoaderOn:true})
         
         if(this.state.allMovies.length === 1)
-            this.setState({isLoaderOn:false, allMoviesLength:0, allMoviesLength:0})
+            this.setState({isLoaderOn:false, allMoviesLength:0})
            
     }
     onDragOver = (e) =>
@@ -170,7 +170,6 @@ class Profile extends Component{
         if( !this.state.error){ 
             return(
                 <div>
-                    <Loader show={this.state.isLoaderOn} />
                     <Navbar
                         categories = {this.props.categories}
                         title="My profile"
@@ -188,6 +187,7 @@ class Profile extends Component{
                         updateShowingMovies={this.updateShowingMovies}
                     />
                 <div className="results movieShow">
+                <Loader show={this.state.isLoaderOn} />
                 
                     {
                         this.state.movies.map( (movie, index)=>{

@@ -70,6 +70,8 @@ class Present extends Component{
         // update the content
         this.setGenreContent(id)
     }
+
+    //update users input
     userInputupdate = (query) =>{
         this.props.userInput(query)
         

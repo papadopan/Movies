@@ -41,18 +41,18 @@ class InputField extends Component{
 
         return(
             <div>
-            <TextField
-                floatingLabelText=" movie name . . . "  
-                floatingLabelStyle={styles.floatingLabelStyle}
-                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                underlineFocusStyle={styles.floatingLabelStyle}
-                inputStyle={styles.floatingLabelFocusStyle}
-                onChange={(e) => this.setState({query:e.target.value})}
-                onKeyPress={this.enterButtonPressed}
-            />
-            <Link to ="/present">
-                <button onClick={this.sendSearch} className="button_search"> Search</button>
-            </Link>
+                <TextField
+                    floatingLabelText=" movie name . . . "  
+                    floatingLabelStyle={styles.floatingLabelStyle}
+                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                    underlineFocusStyle={styles.floatingLabelStyle}
+                    inputStyle={styles.floatingLabelFocusStyle}
+                    onChange={(e) => this.setState({query:e.target.value})}
+                    onKeyPress={this.enterButtonPressed}
+                />
+                <Link to ="/present">
+                    <button onClick={this.sendSearch} className="button_search"> Search</button>
+                </Link>
             </div>
         );
     }

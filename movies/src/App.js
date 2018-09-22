@@ -52,11 +52,6 @@ class App extends Component {
     for (let item in items)
     {
       movies.push(items[item].data)
-
-    }
-  
-    for (let item in items)
-    {
       uids.push(items[item].uid)
     }
 
@@ -90,9 +85,7 @@ class App extends Component {
 
         localStorage.setItem("myMovies", JSON.stringify(movies))
 
-
         // update the firebase
-
         var uid = firebase.database().ref().child('movies_list').push().key
 
         var data ={
@@ -147,7 +140,9 @@ class App extends Component {
             <MuiThemeProvider>
               <BrowserRouter>
                 <Switch>
+
                   <Route path="/" exact component={Welcome}/>
+
                   <Route path="/main"  render={ (props) =>(
                     <Main
                       fetchingMovies = {this.fetchMovies}
@@ -163,6 +158,7 @@ class App extends Component {
                       {...props}
                     />
                   )}/>
+
                   <Route path="/present" render = { (props)=>(
                     <Present
                       categories = {this.fetchCategories}
@@ -181,6 +177,7 @@ class App extends Component {
                       {...props}
                     />
                   )}/>
+
                   <Route path="/view/:movieID" render={ (props) =>(
                     <View
                       categories = {this.fetchCategories}
@@ -196,6 +193,7 @@ class App extends Component {
                       />
                   )}
                   />
+                  
                   <Route path="/profile" render={ (props) =>(
                     <Profile 
                       categories = {this.fetchCategories}
