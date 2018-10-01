@@ -29,7 +29,7 @@ class Box extends Component{
     render(){
         return(
                 <div className="card" id={this.props.id} onClick={this.sendMovieId}>
-                    <Link to={`view/${this.props.id}`} style={{ textDecoration: 'none', color:'#FFFFF' }}>
+                    <Link to={`/view/${this.props.id}`} style={{ textDecoration: 'none', color:'#FFFFF' }}>
                         <div className="card_image">
                             <img src={this.props.image} alt="movie theater"/>
                         </div>

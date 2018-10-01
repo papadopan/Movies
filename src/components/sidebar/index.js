@@ -29,7 +29,7 @@ class Sidebar extends Component{
         this.props.selectedId(name, id)
         
         // set the local storage    
-        localStorage.setItem("searchTitle", name)
+        localStorage.setItem("genreTitle", name)
         localStorage.setItem("GenreId", id)
         localStorage.setItem("SidebarSearch", "genre")
     }

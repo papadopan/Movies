@@ -19,7 +19,7 @@ class Profile extends Component{
     userInputHandle = ( filter )=>{
         this.props.userInput(filter)
 
-        this.props.history.push('/present')
+        this.props.history.push(`/movies/${filter}`)
     }
     componentDidMount(){
         this.setState({openModal:false, error:false, isLoaderOn:true})

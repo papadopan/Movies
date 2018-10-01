@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Welcome , Main, Present, View, Profile } from './components'
+import { Welcome , Main, Present, View, Profile, Movies } from './components'
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import firebase from './firebase.js'
@@ -151,6 +151,24 @@ class App extends Component {
                       userQuery = {this.state.query}
                       title ={ this.state.title}
                       userInput = { query => this.setState({query:query,title:query})}
+                      movieId={(id) => this.setState({chosenMovieId: id})}
+                      myMovies={this.state.myMovies}
+                      handleUserClick = {this.handleUserClick}
+                      {...props}
+                    />
+                  )}/>
+                  
+                  <Route path="/movies/:movieName" render = { (props)=>(
+                    <Movies
+                      categories = {this.fetchCategories}
+                      selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
+                      userInput = { query => this.setState({query:query,title:query})}
+                      userQuery = {this.state.query}
+                      genres = {this.fetchGenreList}
+                      title ={ this.state.title}
+                      selection = {this.state.selection}
+                      movie = {this.fetchMovie}
+                      names={this.state.names}
                       movieId={(id) => this.setState({chosenMovieId: id})}
                       myMovies={this.state.myMovies}
                       handleUserClick = {this.handleUserClick}

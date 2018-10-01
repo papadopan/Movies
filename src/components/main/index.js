@@ -49,7 +49,7 @@ class Main extends Component{
         this.props.userInput(query)
         
         //transfer to present screen
-        this.props.history.push("/present")
+        this.props.history.push(`/movies/${query}`)
     }
     //pagination handle
     handlePageChange = (page_number) =>

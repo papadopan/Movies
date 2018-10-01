@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import './present.css'
+import React, { Component} from 'react'
 import { Navbar, Results , Loader, Error} from '../../components'
+import './movies.css'
 
+class Movies extends Component{
 
-class Present extends Component{
     constructor(props){
         super(props)
         this.state={
@@ -15,12 +15,11 @@ class Present extends Component{
     componentDidMount(){
         this.setState({isLoaderOn:true, error:false})
 
-        // set the content, decide which api call to make 
-        if (localStorage.getItem("SidebarSearch") !== undefined)
-            this.setContent(localStorage.getItem("GenreId"), this.props.genres)
-        else
-            this.setState({error:true})
-   
+        // set the content
+        if( localStorage.getItem("SidebarSearch") !== undefined)
+            this.setContent(this.props.match.params.movieName, this.props.movie)
+        else    
+            this.setState({error:false})
     }
 
     // Set contents Content
@@ -36,7 +35,6 @@ class Present extends Component{
         }))
         .catch( () => this.setState({error:true}) )
     } 
-
     updateContent = (name, id) =>{
         //send data to the upper state
         this.props.selectedId(name, id)
@@ -61,12 +59,12 @@ class Present extends Component{
     }
 
     render(){
-        if( !this.state.error){
+        if( !this.state.error && this.state.total_results>0){
             return(
                 <div>
                     <Navbar 
                         categories = {this.props.categories}
-                        title={localStorage.getItem("genreTitle")}
+                        title={this.props.match.params.movieName}
                         selectedId={this.updateContent}
                         userInput = {this.userInputupdate}
                     />
@@ -85,7 +83,7 @@ class Present extends Component{
         }
         else{
             return(
-                    <Error />
+                <Error />
             );
             
         }
@@ -93,4 +91,4 @@ class Present extends Component{
     }
 }
 
-export default Present;
+export default Movies;
