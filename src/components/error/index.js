@@ -7,8 +7,8 @@ class Error extends Component{
         return(
                 <div className="main_container">
                     <div className="error_message">
-                        <span >Our service is unavailable now, please visit us another time </span>
-                        <Link to="/">
+                        <span >There is a problem to our service, please visit us again</span>
+                        <Link to="/main">
                             <button className="home_button">home</button>
                         </Link>
                     </div>

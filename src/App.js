@@ -199,7 +199,6 @@ class App extends Component {
                       categories = {this.fetchCategories}
                       selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
                       userQuery = {this.state.query}
-                      title ="Antonis"
                       userInput = { query => this.setState({query:query,title:query})}
                       chosenId={this.state.chosenMovieId}
                       infos={this.fetchMovieInfo}

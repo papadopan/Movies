@@ -16,7 +16,7 @@ class Movies extends Component{
         this.setState({isLoaderOn:true, error:false})
 
         // set the content
-        if( localStorage.getItem("SidebarSearch") !== undefined)
+        if( localStorage.getItem("SidebarSearch"))
             this.setContent(this.props.match.params.movieName, this.props.movie)
         else    
             this.setState({error:false})
@@ -59,7 +59,7 @@ class Movies extends Component{
     }
 
     render(){
-        if( !this.state.error && this.state.total_results>0){
+        if( !this.state.error && this.state.total_results>0 ){
             return(
                 <div>
                     <Navbar 
