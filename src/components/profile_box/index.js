@@ -24,6 +24,7 @@ class ProfileBox extends Component{
     firebase.database().ref('movies_list/'+ name).update({stars : nextValue})
     }
 
+    // handle the modal 
     handleModal = (index) =>{
         this.setState({ modalId:index , openModal:true })        
     }

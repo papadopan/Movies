@@ -35,15 +35,6 @@ class Movies extends Component{
         }))
         .catch( () => this.setState({error:true}) )
     } 
-    updateContent = (name, id) =>{
-        //send data to the upper state
-        this.props.selectedId(name, id)
-
-        this.setState({isLoaderOn:true})
-
-        // update the content
-        this.setContent(id, this.props.genres)
-    }
 
     //update users input
     userInputupdate = (query) =>{
@@ -52,7 +43,7 @@ class Movies extends Component{
         //transfer to present screen
         this.props.history.push(`/movies/${query}`)
 
-        this.setState({isLoaderOn:true})
+        // this.setState({isLoaderOn:true})
 
         // update the content
         this.setContent(query, this.props.movie)
@@ -65,7 +56,7 @@ class Movies extends Component{
                     <Navbar 
                         categories = {this.props.categories}
                         title={this.props.match.params.movieName}
-                        selectedId={this.updateContent}
+                        selectedId={this.props.selectedId}
                         userInput = {this.userInputupdate}
                     />
                     <div className="results">

@@ -21,6 +21,7 @@ class Profile extends Component{
 
         this.props.history.push(`/movies/${filter}`)
     }
+    
     componentDidMount(){
         this.setState({openModal:false, error:false, isLoaderOn:true})
         this.fetchFirebaseData()  

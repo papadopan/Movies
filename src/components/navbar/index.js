@@ -18,12 +18,13 @@ class Navbar extends Component{
         this.setState({showingSideBar: !this.state.showingSideBar})
     }
 
-    // update present component
+    // update user search input
     updateUserInput = ( query ) =>{
         this.handleHamburgerClick()
 
         this.props.userInput(query)
     }
+
     // update selected id
     updateSelectedId = (name, id)=>{
         this.props.selectedId(name, id)

@@ -37,27 +37,12 @@ class Present extends Component{
         .catch( () => this.setState({error:true}) )
     } 
 
-    updateContent = (name, id) =>{
-        //send data to the upper state
-        this.props.selectedId(name, id)
-
-        this.setState({isLoaderOn:true})
-
-        // update the content
-        this.setContent(id, this.props.genres)
-    }
-
     //update users input
     userInputupdate = (query) =>{
         this.props.userInput(query)
-        
-        //transfer to present screen
+
+        //transfer to movies screen
         this.props.history.push(`/movies/${query}`)
-
-        this.setState({isLoaderOn:true})
-
-        // update the content
-        this.setContent(query, this.props.movie)
     }
 
     render(){
@@ -67,7 +52,7 @@ class Present extends Component{
                     <Navbar 
                         categories = {this.props.categories}
                         title={localStorage.getItem("genreTitle")}
-                        selectedId={this.updateContent}
+                        selectedId={this.props.selectedId}
                         userInput = {this.userInputupdate}
                     />
                     <div className="results">

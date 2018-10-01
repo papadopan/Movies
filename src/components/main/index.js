@@ -24,6 +24,8 @@ class Main extends Component{
         // set movies to the state
         this.setMovies( localStorage.getItem("selectedFilter") ? localStorage.getItem("selectedFilter") : "upcoming" , 1)
     }
+
+    // fetch all the movies 
     setMovies = (filter, page_number) =>{
         this.props.fetchingMovies(filter, page_number)
         .then( movie => this.setState({
@@ -34,7 +36,6 @@ class Main extends Component{
             isLoaderOn:false
         }))
         .catch( () => this.setState({error:true}) )
-
     }
 
     //change filter
@@ -45,21 +46,22 @@ class Main extends Component{
         localStorage.setItem("selectedFilterName", e.target.name)
         
     }
+    // update the user search input
     userInputupdate = (query) =>{
         this.props.userInput(query)
-        
         //transfer to present screen
         this.props.history.push(`/movies/${query}`)
     }
     //pagination handle
     handlePageChange = (page_number) =>
     {
+        // present 20 pages for every type
         if(page_number <=20){
+
             this.setState({active_page:page_number, isLoaderOn:true})
-        
+            
             // update the movies content
             this.setMovies( this.state.filtering, page_number)
-
         }
     
         

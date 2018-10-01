@@ -29,6 +29,7 @@ class App extends Component {
   fetchRecommended = MOVIE_CALL.fetchRecommended
 
   componentDidMount(){
+    // if there are data at the local storage
     if ( localStorage.getItem("myMovies"))
     {
         this.setState({
@@ -48,7 +49,6 @@ class App extends Component {
     let movies = []
     let uids = []
     
-    
     for (let item in items)
     {
       movies.push(items[item].data)
@@ -59,7 +59,6 @@ class App extends Component {
         myMovies:movies,
         moviesIDS:uids
     })
-
 
     localStorage.setItem("myMovies", JSON.stringify(movies))
     localStorage.setItem("myUids" , JSON.stringify(uids))

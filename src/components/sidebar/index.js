@@ -19,11 +19,13 @@ class Sidebar extends Component{
 
     componentDidMount(){
         this.setState({error:false})
+
+        // fetch all the movie categories for the sidebar
         this.props.categories().then(cat=> this.setState({categories : cat.genres}))
                                 .catch( (error) => this.setState({error:true}))
     }
 
-    // when select the specific genre
+    // handle specific genre selection
     genreSelected = (name , id) =>{
         this.setState({name: name, selected_id:id})
         this.props.selectedId(name, id)
@@ -34,7 +36,7 @@ class Sidebar extends Component{
         localStorage.setItem("SidebarSearch", "genre")
     }
 
-    // when the user sends the input
+    // handle user serach input 
     inputInserted = (input) =>{
         this.props.userInput(input)
         localStorage.setItem("SidebarSearch", "userInputMovie")
