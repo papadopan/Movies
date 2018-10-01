@@ -25,9 +25,7 @@ class ProfileBox extends Component{
     }
 
     handleModal = (index) =>{
-        this.setState({ modalId:index , openModal:true })
-        console.log(this.props.movie[index])
-        
+        this.setState({ modalId:index , openModal:true })        
     }
     // Drag and Drop
 

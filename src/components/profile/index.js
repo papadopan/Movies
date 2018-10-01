@@ -1,7 +1,6 @@
 import React , { Component } from 'react'
-import { Navbar, ProfileBox, Filtering, Stats} from '../../components'
+import { Navbar, ProfileBox, Filtering, Stats, Loader, Error} from '../../components'
 import FontAwesome from 'react-fontawesome'
-import {Link} from 'react-router-dom'
 import './profile.css'
 import firebase from '../../firebase'
 
@@ -23,7 +22,7 @@ class Profile extends Component{
         this.props.history.push('/present')
     }
     componentDidMount(){
-        this.setState({openModal:false, error:false})
+        this.setState({openModal:false, error:false, isLoaderOn:true})
         this.fetchFirebaseData()  
     }
     
@@ -59,7 +58,7 @@ class Profile extends Component{
             return 0;
           }
           movies.sort(compare);
-          console.log(movies)
+          
 
         // clear the state
         this.setState({
@@ -69,13 +68,18 @@ class Profile extends Component{
             allMovies:[],
             infos:[],
             allGenres:[],
-            moviesNumber: movies.length
+            moviesNumber: movies.length,
+            isLoaderOn:false,
+            maxGenre:'not movies yet', 
+            moviesLength:'0'
           })
           let length = 0; 
+        
+        
                    
         movies.map( id =>{
             
-            this.props.fetchMovieInfo(id.data).then( movie =>{
+           return  this.props.fetchMovieInfo(id.data).then( movie =>{
 
                 // instance of the state
                 let movies = this.state.movies.slice()
@@ -85,7 +89,7 @@ class Profile extends Component{
                 
                 // all the genres in one array 
                 movie.genres.map( genre=>{
-                    genres.push(genre.name)
+                    return genres.push(genre.name)
                 })
 
                 // most common genre
@@ -117,7 +121,7 @@ class Profile extends Component{
 
 
                 //upodate the state
-                this.setState({movies:movies, allMovies:movies, moviesLength:length, allMoviesLength:length, allGenres:genres, maxGenre: maxGenre})
+                this.setState({movies:movies, allMovies:movies, moviesLength:length, allMoviesLength:length, allGenres:genres, maxGenre: maxGenre, isLoaderOn:false})
             })
             .catch( error => this.setState({error:true}))
         })
@@ -127,9 +131,14 @@ class Profile extends Component{
   
     }
 
+    // when the user drops the movie to the delete area, the movie is automatically removed
     onDrop = (e)=>{
         this.props.deleteId(this.state.dragId)
-        this.setState({maxGenre:'not movies yet', moviesLength:'0'})
+        this.setState({isLoaderOn:true})
+        
+        if(this.state.allMovies.length === 1)
+            this.setState({isLoaderOn:false, allMoviesLength:0})
+           
     }
     onDragOver = (e) =>
     {
@@ -147,7 +156,6 @@ class Profile extends Component{
                     length+=this.state.allMovies[i].runtime
                 }
             }
-    
             this.setState({movies: newMovies, moviesNumber:newMovies.length, moviesLength:length})
 
         }else{
@@ -176,45 +184,37 @@ class Profile extends Component{
                         tags={this.state.tags}
                         updateShowingMovies={this.updateShowingMovies}
                     />
-                <div className="results movieShow">
-                
-                    {
-                        this.state.movies.map( (movie, index)=>{
-                            return <ProfileBox
-                                    key={movie.firebase_ids}
-                                    movie={movie}
-                                    index={index}
-                                    handleModal={this.handleModal}   
-                                    drag={(id) =>this.setState({dragId:id})}
-                                    />
-                        })
-                    }
+                    <div className="results movieShow">
+                        <Loader show={this.state.isLoaderOn} />
+                        
+                            {
+                                this.state.movies.map( (movie, index)=>{
+                                    return <ProfileBox
+                                            key={movie.firebase_ids}
+                                            movie={movie}
+                                            index={index}
+                                            handleModal={this.handleModal}   
+                                            drag={(id) =>this.setState({dragId:id})}
+                                            />
+                                })
+                            }
                     </div>
-                
-                <div 
-                        className="trash" 
-                        onDrop = {(e) => this.onDrop(e)}
-                        onDragOver = {(e)=>this.onDragOver(e)}>
-                        <FontAwesome
-                            className="far fa-trash-alt"
-                            size="2x"
-                            name="trash"
-                        />
-                </div>
+                    <div 
+                            className="trash" 
+                            onDrop = {(e) => this.onDrop(e)}
+                            onDragOver = {(e)=>this.onDragOver(e)}>
+                            <FontAwesome
+                                className="far fa-trash-alt"
+                                size="2x"
+                                name="trash"
+                            />
+                    </div>
                 </div>
             );
         }
         else{
             return(
-                <div className="main_container">
-                <div className="error_message">
-                    <span >Our service is unavailable now, please visit us another time </span>
-                    <Link to="/">
-                        <button className="home_button">home</button>
-                    </Link>
-                </div>
- 
-                </div>
+                    <Error />
             );
         }
     }

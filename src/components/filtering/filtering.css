@@ -4,3 +4,12 @@
     display: flex;
     justify-content: center;
 }
+
+
+@media only screen and (max-width: 480px){
+    .statsBar{
+       height: 20vh;
+    }
+  
+  }
+  

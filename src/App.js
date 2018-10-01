@@ -40,7 +40,7 @@ class App extends Component {
       this.fetchFirebaseData()
   }
 
-  // make the connection with the firebase database
+  // establish the connection with the firebase database
   fetchFirebaseData = () =>{
     const itemsRef = firebase.database().ref('movies_list')
     itemsRef.on('value', (snapshot) => {
@@ -52,11 +52,6 @@ class App extends Component {
     for (let item in items)
     {
       movies.push(items[item].data)
-
-    }
-  
-    for (let item in items)
-    {
       uids.push(items[item].uid)
     }
 
@@ -90,9 +85,7 @@ class App extends Component {
 
         localStorage.setItem("myMovies", JSON.stringify(movies))
 
-
         // update the firebase
-
         var uid = firebase.database().ref().child('movies_list').push().key
 
         var data ={
@@ -117,6 +110,7 @@ class App extends Component {
         firebase.database().ref().update(updates)
       }
   }
+  // function to delete movies from firebase
   deleteFromMovies = (id) =>{
     let uid = this.state.moviesIDS[this.state.myMovies.indexOf(id)]
     firebase.database().ref().child('/movies_list/' + uid).remove();
@@ -146,7 +140,9 @@ class App extends Component {
             <MuiThemeProvider>
               <BrowserRouter>
                 <Switch>
+
                   <Route path="/" exact component={Welcome}/>
+
                   <Route path="/main"  render={ (props) =>(
                     <Main
                       fetchingMovies = {this.fetchMovies}
@@ -155,13 +151,13 @@ class App extends Component {
                       userQuery = {this.state.query}
                       title ={ this.state.title}
                       userInput = { query => this.setState({query:query,title:query})}
-                      saveFilter = {(filter) => console.log(filter)}
                       movieId={(id) => this.setState({chosenMovieId: id})}
                       myMovies={this.state.myMovies}
                       handleUserClick = {this.handleUserClick}
                       {...props}
                     />
                   )}/>
+
                   <Route path="/present" render = { (props)=>(
                     <Present
                       categories = {this.fetchCategories}
@@ -173,13 +169,13 @@ class App extends Component {
                       selection = {this.state.selection}
                       movie = {this.fetchMovie}
                       names={this.state.names}
-                      saveFilter = {(filter) => console.log(filter)}
                       movieId={(id) => this.setState({chosenMovieId: id})}
                       myMovies={this.state.myMovies}
                       handleUserClick = {this.handleUserClick}
                       {...props}
                     />
                   )}/>
+
                   <Route path="/view/:movieID" render={ (props) =>(
                     <View
                       categories = {this.fetchCategories}
@@ -187,7 +183,6 @@ class App extends Component {
                       userQuery = {this.state.query}
                       title ="Antonis"
                       userInput = { query => this.setState({query:query,title:query})}
-                      saveFilter = {(filter) => console.log(filter)}
                       chosenId={this.state.chosenMovieId}
                       infos={this.fetchMovieInfo}
                       fetchRecommended = {this.fetchRecommended}
@@ -195,6 +190,7 @@ class App extends Component {
                       />
                   )}
                   />
+                  
                   <Route path="/profile" render={ (props) =>(
                     <Profile 
                       categories = {this.fetchCategories}

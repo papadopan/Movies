@@ -72,6 +72,11 @@ ul.dropdown-menu li a:hover{
 .button_search{
   margin-top: 100px
 }
+.profile_text{
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 3px;
+}
 .profileIcon{
   height: 150px;
   display: flex;

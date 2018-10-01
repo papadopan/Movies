@@ -57,8 +57,6 @@ class Navbar extends Component{
                     categories={this.props.categories}
                     userInput = {this.updateUserInput}
                     selectedId = {this.updateSelectedId}
-                    saveFilter = {(filter) => this.props.saveFilter(filter)}
-                    
                 />          
             </div>
         );

@@ -2,37 +2,24 @@
 const API_KEY = '?api_key=f35de773b53c4803aa0d72b2f16794f4&language=en-US';
 
 // API DOMAIN
-const API_DOMAIN = 'https://api.themoviedb.org/3/movie';
+const API_DOMAIN = 'https://api.themoviedb.org/3/';
 
+// define API page
 const API_PAGE = '&page='
 
-const url_maker = (filter, num) =>{
-    if( num === undefined)
-        return `${API_DOMAIN}/${filter}${API_KEY}`
-    else
-    return `${API_DOMAIN}/${filter}${API_KEY}${API_PAGE}${num}`
-
-}
-
-
-
 const MOVIE_API = fetch =>({
-    fetchMovies : (filter, num)  => fetch( url_maker(filter, num))
+    fetchMovies : (filter, num)  => fetch( `${API_DOMAIN}movie/${filter}${API_KEY}${API_PAGE}${num}`)
                                     .then(response => response.json()),
-
-    fetchCategories: () =>fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=f35de773b53c4803aa0d72b2f16794f4&language=en-US')
+    fetchCategories: () =>fetch(`${API_DOMAIN}genre/movie/list${API_KEY}`)
                             .then(response=> response.json()),
-    fetchSpecificGenre: (genre_id) => fetch('https://api.themoviedb.org/3/genre/'+ genre_id +'/movies?api_key=f35de773b53c4803aa0d72b2f16794f4&language=en-US&include_adult=false&page=1')
+    fetchSpecificGenre: (genre_id) => fetch(`${API_DOMAIN}genre/${genre_id}/movies${API_KEY}&include_adult=false&page=1`)
                                 .then(response=> response.json()),
-    fetchMovie : (name) => fetch('https://api.themoviedb.org/3/search/movie?api_key=f35de773b53c4803aa0d72b2f16794f4&language=en-US&query='+ name )
+    fetchMovie : (name) => fetch(`${API_DOMAIN}search/movie${API_KEY}&query=${name}`)
                                 .then(response => response.json()) ,
-    fetchMovieInfos : (id) => fetch(' https://api.themoviedb.org/3/movie/'+ id +'?api_key=f35de773b53c4803aa0d72b2f16794f4')
+    fetchMovieInfos : (id) => fetch(`${API_DOMAIN}movie/${id}${API_KEY}`)
                                 .then(response=> response.json()),
-    fetchRecommended : (id) => fetch('https://api.themoviedb.org/3/movie/' + id + '/recommendations?api_key=f35de773b53c4803aa0d72b2f16794f4&language=en-US&page=1')
+    fetchRecommended : (id) => fetch(`${API_DOMAIN}movie/${id}/recommendations${API_KEY}${API_PAGE}1`)
                                 .then(response => response.json())
-                                
-                                
-
 })
 
 export default MOVIE_API;

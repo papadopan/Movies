@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Loader, Box} from '../../components'
+import { Box} from '../../components'
 import './results.css'
 
 
@@ -14,7 +14,7 @@ class Results extends Component{
                                     title = {movie.title}
                                     date= {movie.release_date}
                                     id={movie.id}
-                                    image = { `http://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+                                    image = { `https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
                                     movieId={this.props.movieId}
                                     myMovies={this.props.myMovies}
                                     handleUserClick = {this.props.handleUserClick}
