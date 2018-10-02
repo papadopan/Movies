@@ -35,10 +35,12 @@ class ProfileBox extends Component{
         this.setState({ dragId : e.target.id})
         this.props.drag(e.target.id)
     }
+    // drag over 
     onDragOver = (e) =>
     {
         e.preventDefault();
     }
+    
     // update movie tag
     tagUpdate = (tag, firebaseId) =>{
         if(tag.replace(/\s/g, '').length !== 0 || tag!=="")

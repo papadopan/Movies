@@ -11,11 +11,7 @@ class PopOver extends Component{
             newTag:''
         }
     }
-
-    //handle tag input from the user
-    handleTagInput = (e) =>{
-        console.log(e.target.value)
-    }
+    
     // if enter key is pressed
     enterKeyPress = (e) =>{
         if(e.key=== "Enter")

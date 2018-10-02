@@ -85,8 +85,8 @@ class View extends Component{
                                     >
                                         {
                                             this.state.recommendedMovies.map( (movie, index) =>{
-                                                return     <Carousel.Item key={index}>
-                                                            <img width={500} height={500} alt="900x500" src={`http://image.tmdb.org/t/p/w185/${movie.poster_path}`} />
+                                                return      <Carousel.Item key={index}>
+                                                                <img width={500} height={500} alt="900x500" src={`http://image.tmdb.org/t/p/w185/${movie.poster_path}`} />
                                                             </Carousel.Item>
                                             })
                                         }

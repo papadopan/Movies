@@ -58,7 +58,6 @@ class Main extends Component{
             this.setMovies( this.state.filtering, page_number)
         }
     
-        
     }
     render(){
         if( !this.state.error){
