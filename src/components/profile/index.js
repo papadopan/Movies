@@ -16,16 +16,21 @@ class Profile extends Component{
             error:false
         }
     }
-    userInputHandle = ( filter )=>{
-        this.props.userInput(filter)
-
-        this.props.history.push(`/movies/${filter}`)
-    }
     
     componentDidMount(){
         this.setState({openModal:false, error:false, isLoaderOn:true})
         this.fetchFirebaseData()  
     }
+
+    // function to sort movies based on the tag
+    compare(a,b) 
+    {
+        if (a.tag < b.tag)
+          return -1;
+        if (a.tag > b.tag)
+          return 1;
+        return 0;
+      }
     
     // fetch data from firebase
     fetchFirebaseData = () =>{
@@ -50,15 +55,8 @@ class Profile extends Component{
           }
         }
 
-        // sort movies based on the stars
-        function compare(a,b) {
-            if (a.tag < b.tag)
-              return -1;
-            if (a.tag > b.tag)
-              return 1;
-            return 0;
-          }
-          movies.sort(compare);
+        // sort movies
+        movies.sort(this.compare);
           
 
         // clear the state
@@ -74,9 +72,7 @@ class Profile extends Component{
             maxGenre:'not movies yet', 
             moviesLength:'0'
           })
-          let length = 0; 
-        
-        
+        let length = 0; 
                    
         movies.map( id =>{
             
@@ -162,6 +158,8 @@ class Profile extends Component{
         }else{
             this.setState({movies:this.state.allMovies, moviesNumber:this.state.allMovies.length, moviesLength:this.state.allMoviesLength})   
         }
+        // sort movies
+        this.state.movies.sort(this.compare)
 
 
     }
@@ -173,7 +171,7 @@ class Profile extends Component{
                         categories = {this.props.categories}
                         title="My profile"
                         selectedId={this.props.selectedId}
-                        userInput = {this.userInputHandle}
+                        userInput = {query=> this.props.history.push(`/movies/${query}`)}
                         saveFilter = {(filter) => this.props.saveFilter(filter)}
                     />
                     <Stats
@@ -201,14 +199,14 @@ class Profile extends Component{
                             }
                     </div>
                     <div 
-                            className="trash" 
-                            onDrop = {(e) => this.onDrop(e)}
-                            onDragOver = {(e)=>this.onDragOver(e)}>
-                            <FontAwesome
-                                className="far fa-trash-alt"
-                                size="2x"
-                                name="trash"
-                            />
+                        className="trash" 
+                        onDrop = {(e) => this.onDrop(e)}
+                        onDragOver = {(e)=>this.onDragOver(e)}>
+                        <FontAwesome
+                            className="far fa-trash-alt"
+                            size="2x"
+                            name="trash"
+                        />
                     </div>
                 </div>
             );

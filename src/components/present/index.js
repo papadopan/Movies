@@ -37,14 +37,6 @@ class Present extends Component{
         .catch( () => this.setState({error:true}) )
     } 
 
-    //update users input
-    userInputupdate = (query) =>{
-        this.props.userInput(query)
-
-        //transfer to movies screen
-        this.props.history.push(`/movies/${query}`)
-    }
-
     render(){
         if( !this.state.error){
             return(
@@ -53,7 +45,7 @@ class Present extends Component{
                         categories = {this.props.categories}
                         title={localStorage.getItem("genreTitle")}
                         selectedId={this.props.selectedId}
-                        userInput = {this.userInputupdate}
+                        userInput = {query=> this.props.history.push(`/movies/${query}`)}
                     />
                     <div className="results">
                         <Loader show={this.state.isLoaderOn} />

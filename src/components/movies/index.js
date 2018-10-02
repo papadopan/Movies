@@ -38,12 +38,9 @@ class Movies extends Component{
 
     //update users input
     userInputupdate = (query) =>{
-        this.props.userInput(query)
         
         //transfer to present screen
         this.props.history.push(`/movies/${query}`)
-
-        // this.setState({isLoaderOn:true})
 
         // update the content
         this.setContent(query, this.props.movie)

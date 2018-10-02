@@ -147,7 +147,6 @@ class App extends Component {
                       fetchingMovies = {this.fetchMovies}
                       categories = {this.fetchCategories}
                       selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
-                      userQuery = {this.state.query}
                       title ={ this.state.title}
                       userInput = { query => this.setState({query:query,title:query})}
                       movieId={(id) => this.setState({chosenMovieId: id})}
@@ -162,7 +161,6 @@ class App extends Component {
                       categories = {this.fetchCategories}
                       selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
                       userInput = { query => this.setState({query:query,title:query})}
-                      userQuery = {this.state.query}
                       genres = {this.fetchGenreList}
                       title ={ this.state.title}
                       selection = {this.state.selection}
@@ -180,7 +178,6 @@ class App extends Component {
                       categories = {this.fetchCategories}
                       selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
                       userInput = { query => this.setState({query:query,title:query})}
-                      userQuery = {this.state.query}
                       genres = {this.fetchGenreList}
                       title ={ this.state.title}
                       selection = {this.state.selection}
@@ -197,7 +194,6 @@ class App extends Component {
                     <View
                       categories = {this.fetchCategories}
                       selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
-                      userQuery = {this.state.query}
                       userInput = { query => this.setState({query:query,title:query})}
                       chosenId={this.state.chosenMovieId}
                       infos={this.fetchMovieInfo}
@@ -212,7 +208,6 @@ class App extends Component {
                       categories = {this.fetchCategories}
                       selectedId = {(name,id) => this.setState({title:name,query:id, selection:'genre'})}
                       userInput = { query => this.setState({query:query,title:query})}
-                      userQuery = {this.state.query}
                       myMovies= {this.state.myMovies}
                       fetchMovieInfo = {this.fetchMovieInfo}
                       deleteId={this.deleteFromMovies}

@@ -39,14 +39,6 @@ class View extends Component{
         .then(response=>  this.setState({recommendedMovies:response.results}))
         .catch(error=> this.setState({error:true}))
     }
-
-    userInputupdate = (query) =>{
-        this.props.userInput(query)
-        
-        //transfer to present screen
-        this.props.history.push(`/movies/${query}`)
-    }
-
     render(){
         if( !this.state.error){
             return(
@@ -55,7 +47,7 @@ class View extends Component{
                     categories = {this.props.categories}
                     title={this.state.title}
                     selectedId={this.props.selectedId}
-                    userInput = {(query) => this.userInputupdate(query)}
+                    userInput = {query=> this.props.history.push(`/movies/${query}`)}
                     saveFilter = {(filter) => this.props.saveFilter(filter)}
                     />
                     <div className="movie_details">

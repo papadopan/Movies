@@ -46,12 +46,6 @@ class Main extends Component{
         localStorage.setItem("selectedFilterName", e.target.name)
         
     }
-    // update the user search input
-    userInputupdate = (query) =>{
-        this.props.userInput(query)
-        //transfer to present screen
-        this.props.history.push(`/movies/${query}`)
-    }
     //pagination handle
     handlePageChange = (page_number) =>
     {
@@ -76,7 +70,7 @@ class Main extends Component{
                                 categories = {this.props.categories}
                                 title="Box office time ..."
                                 selectedId={this.props.selectedId}
-                                userInput = {this.userInputupdate}
+                                userInput = {query=>this.props.history.push(`/movies/${query}`)}
                                 saveFilter = {(filter) => this.props.saveFilter(filter)}
                             />
                         </div>
