@@ -1,10 +1,11 @@
 import React , { Component } from 'react'
-import { Navbar, Error} from '../../components'
+import { Navbar, Error, Loader} from '../../components'
 import star from '../../assets/star.png'
 import time from '../../assets/time.png'
 import money from '../../assets/money.png'
 import { Carousel } from 'react-bootstrap'
 import './view.css'
+
 
 
 class View extends Component{
@@ -17,7 +18,7 @@ class View extends Component{
     }
 
     componentDidMount(){
-        this.setState({error:false})
+        this.setState({error:false, isLoaderOn:true})
         this.fetchInfos()
         this.fetchRecommendations()
     }
@@ -29,7 +30,8 @@ class View extends Component{
             budget: movie.budget,
             time: movie.runtime,
             image:`http://image.tmdb.org/t/p/w185/${movie.poster_path}`,
-            overview:movie.overview
+            overview:movie.overview,
+            isLoaderOn:false
         }) )
         .catch(error => this.setState({error:true}))
     }
@@ -73,10 +75,12 @@ class View extends Component{
                                 <p> {this.state.budget}</p>
                             </div>
                         </div>
+                        <Loader show={this.state.isLoaderOn}/>
                         <div className="recommendations">
                             <div className="recommend_title">
                                 <span>recommended movies ...</span>
                             </div>
+                            
                             <div className="carousel">                            
                                 <div>
                                     <Carousel
@@ -100,7 +104,7 @@ class View extends Component{
         }
         else{
             return(
-                    <Error />
+                <Error />
             );
         }
     }

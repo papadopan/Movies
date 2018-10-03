@@ -4,7 +4,7 @@
     z-index: 1000;
     top: 40%;
     left: 50%;
-    transform: translate(-40%, -50%)
+    transform: translate(-40%, -50%);
 }
 .show{
     display: block;
