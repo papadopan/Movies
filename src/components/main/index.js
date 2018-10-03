@@ -49,8 +49,8 @@ class Main extends Component{
     //pagination handle
     handlePageChange = (page_number) =>
     {
-        // present 20 pages for every type
-        if(page_number <=20){
+        // present 18 pages for every type
+        if(page_number <=18){
 
             this.setState({active_page:page_number, isLoaderOn:true})
             
