@@ -76,12 +76,12 @@ class View extends Component{
                             </div>
                         </div>
                         <Loader show={this.state.isLoaderOn}/>
-                        <div className="recommendations">
+                        <div className="recommendations" >
                             <div className="recommend_title">
-                                <span>recommended movies ...</span>
+                                <span>{this.state.recommendedMovies.length > 0 ? "recommended movies": "no recommended movies"}</span>
                             </div>
                             
-                            <div className="carousel">                            
+                            <div className={this.state.recommendedMovies.length > 0 ? "show carousel": "hide"}>                            
                                 <div>
                                     <Carousel
                                     indicators={false}
