@@ -16,7 +16,10 @@ class App extends Component {
     this.state={
       selectedId:undefined,
       title:'',
-      names:[]
+      names:[],
+      myMovies:[],
+      moviesIDS:[]
+
     }
   }
 
@@ -29,16 +32,7 @@ class App extends Component {
   fetchRecommended = MOVIE_CALL.fetchRecommended
 
   componentDidMount(){
-    // if there are data at the local storage
-    if ( localStorage.getItem("myMovies"))
-    {
-        this.setState({
-          myMovies:JSON.parse(localStorage.getItem("myMovies")),
-          moviesIDS:JSON.parse(localStorage.getItem("myUids"))
-      })
-    }
-    else
-      this.fetchFirebaseData()
+    this.fetchFirebaseData()
   }
 
   // establish the connection with the firebase database
@@ -59,10 +53,6 @@ class App extends Component {
         myMovies:movies,
         moviesIDS:uids
     })
-
-    localStorage.setItem("myMovies", JSON.stringify(movies))
-    localStorage.setItem("myUids" , JSON.stringify(uids))
-
     });
 
   }
@@ -79,10 +69,8 @@ class App extends Component {
         // add id to the state
         let movies = this.state.myMovies.slice()
         movies.push(id)
-
+        
         this.setState({myMovies:movies})
-
-        localStorage.setItem("myMovies", JSON.stringify(movies))
 
         // update the firebase
         var uid = firebase.database().ref().child('movies_list').push().key
