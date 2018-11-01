@@ -82,7 +82,7 @@ class View extends Component{
                             </div>
                             
                             <div className={this.state.recommendedMovies.length > 0 ? "show carousel": "hide"}>                            
-                                <div>
+                                <div className="car">
                                     <Carousel
                                     indicators={false}
                                     interval={2000}
