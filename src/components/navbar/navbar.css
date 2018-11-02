@@ -40,12 +40,12 @@
 }
 @media only screen and (max-width: 768px){
     .header_title span{
-        font-size: 2.5em;
+        font-size: 2em;
     }
 }
 @media only screen and (max-width: 480px){
     .header_title span{
-        font-size: 2em;
+        font-size: 1.5em;
     }
 }
 @media only screen and (max-width: 320px){
