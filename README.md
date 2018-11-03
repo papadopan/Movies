@@ -2,13 +2,18 @@
 
 ## MovieGram
 
-### Is an online platform for movies. Users have the chance to interact with movies and create their own profile and save the movies there. The idea behind this platform is to create a digital library with movies, which movies the user watched and provide specific stats about their preferences.This platform can be used in order for the users to create an online library with all the movies they have watched. 
+### Is an online platform for movies. Users have the chance to interact with movies save them to their profile. The idea behind this platform is to create a digital library with movies, which movies the user watched and provide specific stats about their preferences.This platform can be used in order for the users to create an online library with all the movies they have watched. 
 
 ### Actions for all the movies in their profile
 * Users can save comments/notes for every specific movie
 * Users can rate the movies in a five star scale rating
-* Users can create their own customs lists with movies and search the specific list by name
+* Users can create their own customs lists with movies and search the specific list by name. 
 * Users can delete any movie they want in by simply drag and drop the movie icon, to the delete area at the bottom of the screen
+
+### The process for the users to create their own lists is very simple:
+* Every movie has a tag
+* Users can change this tag, by either creating a new one or select from the already exist
+* Users can filter the movies in their profile by the tag name
 
 Besides those actions, it will provided to users stats about their profile. How many movies they saved, how many time they spend watching the movies and which is their favourite movie genre( It will filter the movie genres and will calculate the most favourite)
 
@@ -23,7 +28,7 @@ Besides those actions, it will provided to users stats about their profile. How 
 * HTML, JavaScript, CSS
 * React
 * Firebase
-* Heroku for deplaoyment
+* Heroku for deployment
 
 ### Structure of the project 
 
