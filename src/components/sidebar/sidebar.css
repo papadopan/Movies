@@ -88,6 +88,8 @@ ul.dropdown-menu li a:hover{
 }
 .profileIcon p{
   margin-top:5px;
+  letter-spacing: 1.5px;
+  font-weight: 400
 }
 .profileIcon img{
   width: 100px;
