@@ -18,6 +18,7 @@
 * Every movie has a tag
 * Users can change this tag, by either creating a new one or select from the already exist
 * Users can filter the movies in their profile by the tag name
+* If the users delete all the movies with a specific tag , the tag will be deleted automatically 
 
 Besides those actions, it will provided to users stats about their profile. How many movies they saved, how many time they spend watching the movies and which is their favourite movie genre( It will filter the movie genres and will calculate the most favourite)
 
