@@ -83,6 +83,11 @@ ul.dropdown-menu li a:hover{
   flex-flow: column;
   justify-content: center;
   align-items: center;
+  border-bottom:1px solid #962A38;
+  margin-bottom: 10px;
+}
+.profileIcon p{
+  margin-top:5px;
 }
 .profileIcon img{
   width: 100px;

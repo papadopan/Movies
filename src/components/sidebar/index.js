@@ -51,6 +51,7 @@ class Sidebar extends Component{
                             <Link to="/profile">
                                 <img src={user} alt="profile user"/>
                             </Link>
+                            <p>Profile</p>
                         </div>
                         <div className="form-group">
                             <p className="profile_text">I am interested in</p>
