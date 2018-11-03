@@ -55,3 +55,7 @@
 * error (component which displays the errors when there is either network or other problem)
 * welcome (welcome screen)
 * loader(loader gif when making api calls)
+
+### Functionality
+
+App is running smoothly to all the browsers besides Firefox. In Firefox there is a disfunctionality  occured.
