@@ -2,7 +2,11 @@
 
 ## MovieGram
 
-### Is an online platform for movies. Users have the chance to interact with movies save them to their profile. The idea behind this platform is to create a digital library with movies, which movies the user watched and provide specific stats about their preferences.This platform can be used in order for the users to create an online library with all the movies they have watched. 
+### Is an online platform for movies. Users have the chance to interact with movies save them to their profile. 
+
+### The idea behind this platform is to create a digital library with movies
+
+### Users cas create a digital library with the movies they already watched, or the movies they plan or they want to watch. The platform will provide information and stats about their movie preferences. 
 
 ### Actions for all the movies in their profile
 * Users can save comments/notes for every specific movie
