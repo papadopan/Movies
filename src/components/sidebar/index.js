@@ -47,12 +47,12 @@ class Sidebar extends Component{
             return(
                 <div className={this.props.show ? 'sidenavbar move' : 'sidenavbar'}>      
                     <div className="searches">
-                        <div className="profileIcon">
-                            <Link to="/profile">
+                        <Link to="/profile" style={{ textDecoration: 'none' }}>
+                            <div className="profileIcon">
                                 <img src={user} alt="profile user"/>
-                            </Link>
-                            <p>Profile</p>
-                        </div>
+                                <p>Profile</p>
+                            </div>
+                        </Link>
                         <div className="form-group">
                             <p className="profile_text">I am interested in</p>
                             <div className="dropdown genres">
