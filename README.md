@@ -4,7 +4,7 @@
 
 ### Is an online platform for movies. Users have the chance to interact with movies save them to their profile. 
 
-### The idea behind this platform is to create a digital library with movies
+### The idea behind this platform is to create a digital library for movies
 
 ### Users cas create a digital library with the movies they already watched, or the movies they plan or they want to watch. The platform will provide information and stats about their movie preferences. 
 
@@ -20,7 +20,10 @@
 * Users can filter the movies in their profile by the tag name
 * If the users delete all the movies with a specific tag , the tag will be deleted automatically 
 
-Besides those actions, it will provided to users stats about their profile. How many movies they saved, how many time they spend watching the movies and which is their favourite movie genre( It will filter the movie genres and will calculate the most favourite)
+### Besides those actions, it will provided to users stats about their profile. 
+* How many movies they saved
+* How much time they spend watching the movies
+* Which is their favourite movie genre( It will filter the movie genres and will calculate the most favourite)
 
 ### General actions 
 * Users can navigate and through a huge list of movies
